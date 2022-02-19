@@ -1,0 +1,14 @@
+{
+  "name": "toukey",
+  "version": "0.0.1",
+  "description": "toukey is a Javascript library for keyboard shortcuts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "keyboard"
+  ],
+  "author": "",
+  "license": "MIT"
+}
