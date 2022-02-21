@@ -1,24 +1,30 @@
-import {isString, isFunction, isObject} from './util'
+import {
+  isString,
+  isFunction,
+  isObject
+} from './util'
 
 let _curScope = 'default';
 let _shouldBindToDocument = true;
 const _handlerMap = new Map();
-_handlerMap.set('*', new Set());
+_handlerMap.set('*', new Map());
 
 function _getKey(value) {
   return value.toLowerCase();
 }
 
 function _handleEvent(event) {
-  const starMap = _handlerMap.get('*');
-  const scopeMap = _handlerMap.get(_curScope);
+  const starScopeMap = _handlerMap.get('*');
+  const curScopeMap = _handlerMap.get(_curScope);
   const eventKey = _getKey(event.key);
-  (starMap.get(eventKey) || []).forEach(handler => {
-    handler.call(this, event);
-  });
-  (scopeMap.get(eventKey) || []).forEach(handler => {
-    handler.call(this, event);
-  });
+  if (event.type === 'keydown') {
+    (starScopeMap.get(eventKey) || []).forEach(handler => {
+      handler.call(this, event);
+    });
+    (curScopeMap.get(eventKey) || []).forEach(handler => {
+      handler.call(this, event);
+    });
+  }
 }
 
 /**
@@ -53,8 +59,17 @@ function subscribe(key, handler, options) {
     document.addEventListener('keyup', _handleEvent);
   }
 
-  const _scopeMap = _handlerMap.get(_scope) || new Map();
-  const _handlerSet = _scopeMap.get(_key) || new Set();
+  if (!_handlerMap.has(_scope)) {
+    _handlerMap.set(_scope, new Map());
+  }
+  
+  const _scopeMap = _handlerMap.get(_scope);
+
+  if (!_scopeMap.has(_key)) {
+    _scopeMap.set(_key, new Set());
+  }
+
+  const _handlerSet = _scopeMap.get(_key);
   _handlerSet.add(handler);
 
   return () => {
