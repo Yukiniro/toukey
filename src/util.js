@@ -24,3 +24,33 @@ export function isFunction(value) {
 export function isObject(value) {
   return value && typeof value === 'object'
 }
+
+/**
+ * @desc Return true if value is undefined
+ * @param {*} value 
+ * @returns 
+ */
+export function isUndefined(value) {
+  return value === void 0;
+}
+
+/**
+ * @desc Remove item from array.
+ * @param {Array} array 
+ * @param {*} item 
+ */
+export function removeFromArray(array, item) {
+  const index = array.indexOf(item);
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
+}
+
+/**
+ * @desc Remove all blank of str
+ * @param {string} str 
+ * @returns 
+ */
+export function filterBlank(str) {
+  return str.replace(/\s+/g, '');
+}
