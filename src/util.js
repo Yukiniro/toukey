@@ -1,43 +1,43 @@
 /**
  * @desc Return true if value is a string
- * @param {*} value 
+ * @param {*} value
  * @returns {boolean}
  */
 export function isString(value) {
-  return typeof value === 'string';
+  return typeof value === "string";
 }
 
 /**
  * @desc Return true if value is a function
- * @param {*} value 
+ * @param {*} value
  * @returns {boolean}
  */
 export function isFunction(value) {
-  return typeof value === 'function';
+  return typeof value === "function";
 }
 
 /**
  * @desc Return true if value is a object
- * @param {*} value 
+ * @param {*} value
  * @returns {boolean}
  */
 export function isObject(value) {
-  return value && typeof value === 'object'
+  return value && typeof value === "object";
 }
 
 /**
  * @desc Return true if value is undefined
- * @param {*} value 
- * @returns 
+ * @param {*} value
+ * @returns
  */
 export function isUndefined(value) {
-  return value === void 0;
+  return typeof value === "undefined";
 }
 
 /**
  * @desc Remove item from array.
- * @param {Array} array 
- * @param {*} item 
+ * @param {Array} array
+ * @param {*} item
  */
 export function removeFromArray(array, item) {
   const index = array.indexOf(item);
@@ -48,16 +48,16 @@ export function removeFromArray(array, item) {
 
 /**
  * @desc Remove all blank of str
- * @param {string} str 
- * @returns 
+ * @param {string} str
+ * @returns
  */
 export function filterBlank(str) {
-  return str.replace(/\s+/g, '');
+  return str.replace(/\s+/g, "");
 }
 
 /**
  * @desc Retrun the lowercase of value.
- * @param {string} value 
+ * @param {string} value
  * @returns {string}
  */
 export function lowerCase(value) {

@@ -1,26 +1,24 @@
-import {
-  transModifierKey
-} from './keys';
+import { transModifierKey } from "./keys";
 import {
   isString,
   isFunction,
   isObject,
   removeFromArray,
   filterBlank,
-  lowerCase,
-} from './util'
+  lowerCase
+} from "./util";
 
-const KEY_DOWN = 'keydown';
-const KEY_UP = 'keyup';
+const KEY_DOWN = "keydown";
+const KEY_UP = "keyup";
 
-let _curScope = 'default';
+let _curScope = "default";
 let _shouldBindToDocument = true;
-let _pressedKeys = [];
+const _pressedKeys = [];
 const _handlerMap = new Map();
-_handlerMap.set('*', []);
+_handlerMap.set("*", []);
 
 function _splitKeys(keys) {
-  return filterBlank(keys).split(',');
+  return filterBlank(keys).split(",");
 }
 
 function _composeKeys(keys, subStr) {
@@ -33,27 +31,31 @@ function _isComposeKey(key, subStr) {
 
 function _isKeyMatch(key) {
   if (Array.isArray(key)) {
-    return lowerCase(key.map(value => transModifierKey(value)).sort().join('')) === lowerCase(_pressedKeys.join(''));
+    return (
+      lowerCase(
+        key
+          .map((value) => transModifierKey(value))
+          .sort()
+          .join("")
+      ) === lowerCase(_pressedKeys.join(""))
+    );
   } else {
-    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === transModifierKey(key);
+    return (
+      _pressedKeys.length === 1 &&
+      lowerCase(_pressedKeys[0]) === transModifierKey(key)
+    );
   }
 }
 
 function _handleEvent(event) {
   _updatePressedKeys(event);
-  const listForAll = _handlerMap.get('*') || [];
+  const listForAll = _handlerMap.get("*") || [];
   const listForScope = _handlerMap.get(_curScope) || [];
-  [...listForAll, ...listForScope].forEach(item => {
-    const {
-      handler,
-      keydown,
-      keyup,
-      key,
-      splitValue,
-    } = item;
+  [...listForAll, ...listForScope].forEach((item) => {
+    const { handler, keydown, keyup, key, splitValue } = item;
 
     const chunks = _splitKeys(key);
-    chunks.forEach(chunk => {
+    chunks.forEach((chunk) => {
       if (_isComposeKey(chunk, splitValue)) {
         const composes = _composeKeys(chunk, splitValue);
         if (_isKeyMatch(composes)) {
@@ -67,24 +69,18 @@ function _handleEvent(event) {
 }
 
 function _dispatch(handler, keydown, keyup, event) {
-  const {
-    type
-  } = event;
-  if ((type === 'keydown' && keydown) || (type === 'keyup' && keyup)) {
+  const { type } = event;
+  if ((type === "keydown" && keydown) || (type === "keyup" && keyup)) {
     handler.call(this, event);
   }
 }
 
 function _updatePressedKeys(event) {
-  const {
-    type,
-    key,
-    repeat
-  } = event;
-  if (type === 'keydown' && !repeat) {
+  const { type, key, repeat } = event;
+  if (type === "keydown" && !repeat) {
     _pressedKeys.push(key);
   }
-  if (type === 'keyup') {
+  if (type === "keyup") {
     queueMicrotask(() => {
       removeFromArray(_pressedKeys, key);
     });
@@ -93,7 +89,7 @@ function _updatePressedKeys(event) {
 
 /**
  * @desc Subscribe the key's keyboard event.
- * @param {string} key 
+ * @param {string} key
  * @param {function} handler - Callback.
  * @param {string | object} options - If the options is a string. It will be the scope.
  * @param {string} options.scope
@@ -104,27 +100,27 @@ function _updatePressedKeys(event) {
  */
 export function subscribe(key, handler, options) {
   if (!isString(key)) {
-    throw new Error('key must be string');
+    throw new Error("key must be string");
   }
 
   if (!isFunction(handler)) {
-    throw new Error('handler must be function');
+    throw new Error("handler must be function");
   }
 
   const _key = key;
-  let _scope = 'default';
-  let _splitValue = '+';
+  let _scope = "default";
+  let _splitValue = "+";
   let _shouldHandleInKeydown = false;
   let _shouldHandleInKeyup = false;
 
   if (isString(options)) {
     _scope = options;
   } else if (isObject(options)) {
-    Object.keys(options).forEach(key => {
-      if (key === 'scope') {
+    Object.keys(options).forEach((key) => {
+      if (key === "scope") {
         _scope = options[key];
       }
-      if (key === 'splitValue') {
+      if (key === "splitValue") {
         _splitValue = options[key];
       }
       if (key === KEY_DOWN) {
@@ -142,8 +138,8 @@ export function subscribe(key, handler, options) {
 
   if (_shouldBindToDocument) {
     _shouldBindToDocument = false;
-    document.addEventListener('keydown', _handleEvent);
-    document.addEventListener('keyup', _handleEvent);
+    document.addEventListener("keydown", _handleEvent);
+    document.addEventListener("keyup", _handleEvent);
   }
 
   if (!_handlerMap.has(_scope)) {
@@ -156,10 +152,10 @@ export function subscribe(key, handler, options) {
     key: _key,
     splitValue: _splitValue,
     keydown: _shouldHandleInKeydown,
-    keyup: _shouldHandleInKeyup,
+    keyup: _shouldHandleInKeyup
   };
 
-  _list.push(_item)
+  _list.push(_item);
 
   return () => {
     const _scopeMap = _handlerMap.get(_scope);
@@ -169,7 +165,7 @@ export function subscribe(key, handler, options) {
         removeFromArray(_list, _item);
       }
     }
-  }
+  };
 }
 
 /**
@@ -182,23 +178,23 @@ export function getScope() {
 
 /**
  * @desc Set the scope.
- * @param {string} scope 
+ * @param {string} scope
  */
 export function setScope(scope) {
   if (!isString(scope)) {
-    throw new Error('scope must be string');
+    throw new Error("scope must be string");
   }
   this._curScope = scope;
 }
 
 export function deleteScope(scope) {
   _handlerMap.delete(scope);
-  _curScope = 'default';
+  _curScope = "default";
 }
 
 export default {
   subscribe,
   getScope,
   setScope,
-  deleteScope,
-}
+  deleteScope
+};
