@@ -90,7 +90,7 @@ function _updatePressedKeys(event) {
  * @param {boolean} options.keyup
  * @returns {function} - Unsubscribe key's keyboard event.
  */
-function subscribe(key, handler, options) {
+export function subscribe(key, handler, options) {
   if (!isString(key)) {
     throw new Error('key must be string');
   }
@@ -164,7 +164,7 @@ function subscribe(key, handler, options) {
  * @desc Return the scope
  * @returns {string}
  */
-function getScope() {
+export function getScope() {
   return _curScope;
 }
 
@@ -172,21 +172,14 @@ function getScope() {
  * @desc Set the scope.
  * @param {string} scope 
  */
-function setScope(scope) {
+export function setScope(scope) {
   if (!isString(scope)) {
     throw new Error('scope must be string');
   }
   this._curScope = scope;
 }
 
-function deleteScope(scope) {
+export function deleteScope(scope) {
   _handlerMap.delete(scope);
   _curScope = 'default';
-}
-
-export default {
-  subscribe,
-  getScope,
-  setScope,
-  deleteScope,
 }
