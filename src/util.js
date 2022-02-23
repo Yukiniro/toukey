@@ -22,7 +22,7 @@ export function isFunction(value) {
  * @returns {boolean}
  */
 export function isObject(value) {
-  return value && typeof value === "object";
+  return Object.prototype.toString.call(value) === "[object Object]";
 }
 
 /**
