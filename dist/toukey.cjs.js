@@ -45,6 +45,17 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+// https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key/Key_Values#modifier_keys
+function transModifierKey(key) {
+  switch (key) {
+    case 'ctrl':
+      return 'Control';
+
+    default:
+      return key;
+  }
+}
+
 /**
  * @desc Return true if value is a string
  * @param {*} value 
@@ -93,6 +104,15 @@ function removeFromArray(array, item) {
 function filterBlank(str) {
   return str.replace(/\s+/g, '');
 }
+/**
+ * @desc Retrun the lowercase of value.
+ * @param {string} value 
+ * @returns {string}
+ */
+
+function lowerCase(value) {
+  return value.toLowerCase();
+}
 
 var KEY_DOWN = 'keydown';
 var KEY_UP = 'keyup';
@@ -104,16 +124,26 @@ var _handlerMap = new Map();
 
 _handlerMap.set('*', []);
 
-function _getKey(value) {
-  return value.toLowerCase();
-}
-
 function _splitKeys(keys) {
   return filterBlank(keys).split(',');
 }
 
 function _composeKeys(keys, subStr) {
   return filterBlank(keys).split(subStr);
+}
+
+function _isComposeKey(key, subStr) {
+  return key.split(subStr).length > 1;
+}
+
+function _isKeyMatch(key) {
+  if (Array.isArray(key)) {
+    return lowerCase(key.map(function (value) {
+      return transModifierKey(value);
+    }).sort().join('')) === lowerCase(_pressedKeys.join(''));
+  } else {
+    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === transModifierKey(key);
+  }
 }
 
 function _handleEvent(event) {
@@ -131,28 +161,24 @@ function _handleEvent(event) {
     var chunks = _splitKeys(key);
 
     chunks.forEach(function (chunk) {
-      if (chunk === splitValue) {
-        _dispatch(handler, chunk, keydown, keyup, event);
-      } else {
-        var composes = _composeKeys(chunk);
+      if (_isComposeKey(chunk, splitValue)) {
+        var composes = _composeKeys(chunk, splitValue);
 
-        composes.forEach(function (subCompose) {
-          _dispatch(handler, subCompose, keydown, keyup, event);
-        });
+        if (_isKeyMatch(composes)) {
+          _dispatch(handler, keydown, keyup, event);
+        }
+      } else if (_isKeyMatch(chunk)) {
+        _dispatch(handler, keydown, keyup, event);
       }
     });
   });
 }
 
-function _dispatch(handler, triggerKey, keydown, keyup, event) {
+function _dispatch(handler, keydown, keyup, event) {
   var type = event.type;
 
-  var pressedKeyString = _pressedKeys.join('');
-
-  if (_getKey(pressedKeyString) === _getKey(triggerKey)) {
-    if (type === 'keydown' && keydown || type === 'keyup' && keyup) {
-      handler.call(this, event);
-    }
+  if (type === 'keydown' && keydown || type === 'keyup' && keyup) {
+    handler.call(this, event);
   }
 }
 
@@ -166,7 +192,9 @@ function _updatePressedKeys(event) {
   }
 
   if (type === 'keyup') {
-    removeFromArray(_pressedKeys, key);
+    queueMicrotask(function () {
+      removeFromArray(_pressedKeys, key);
+    });
   }
 }
 /**
@@ -262,7 +290,6 @@ function subscribe(key, handler, options) {
  * @returns {string}
  */
 
-
 function getScope() {
   return _curScope;
 }
@@ -271,7 +298,6 @@ function getScope() {
  * @param {string} scope 
  */
 
-
 function setScope(scope) {
   if (!isString(scope)) {
     throw new Error('scope must be string');
@@ -279,13 +305,11 @@ function setScope(scope) {
 
   this._curScope = scope;
 }
-
 function deleteScope(scope) {
   _handlerMap["delete"](scope);
 
   _curScope = 'default';
 }
-
 var toukey = {
   subscribe: subscribe,
   getScope: getScope,

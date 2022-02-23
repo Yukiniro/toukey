@@ -14,7 +14,16 @@ export const modifierKeys = [
   'Super',
   'Symbol',
   'SymbolLock',
-  'OS', 
+  'OS',
   'Scroll',
   'AltGr',
-]
+];
+
+export function transModifierKey(key) {
+  switch (key) {
+    case 'ctrl':
+      return 'Control';
+    default:
+      return key;
+  }
+}

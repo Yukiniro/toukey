@@ -1,10 +1,13 @@
-import { modifierKeys } from './keys';
+import {
+  transModifierKey
+} from './keys';
 import {
   isString,
   isFunction,
   isObject,
   removeFromArray,
   filterBlank,
+  lowerCase,
 } from './util'
 
 const KEY_DOWN = 'keydown';
@@ -16,14 +19,6 @@ let _pressedKeys = [];
 const _handlerMap = new Map();
 _handlerMap.set('*', []);
 
-function _getKey(value) {
-  return value.toLowerCase();
-}
-
-function _isModifierKey(value) {
-  return !!modifierKeys.find(key => key.toLowerCase() === value.toLowerCase());
-}
-
 function _splitKeys(keys) {
   return filterBlank(keys).split(',');
 }
@@ -32,8 +27,20 @@ function _composeKeys(keys, subStr) {
   return filterBlank(keys).split(subStr);
 }
 
+function _isComposeKey(key, subStr) {
+  return key.split(subStr).length > 1;
+}
+
+function _isKeyMatch(key) {
+  if (Array.isArray(key)) {
+    return lowerCase(key.map(value => transModifierKey(value)).sort().join('')) === lowerCase(_pressedKeys.join(''));
+  } else {
+    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === transModifierKey(key);
+  }
+}
+
 function _handleEvent(event) {
-  _updatePressedKeys(event); 
+  _updatePressedKeys(event);
   const listForAll = _handlerMap.get('*') || [];
   const listForScope = _handlerMap.get(_curScope) || [];
   [...listForAll, ...listForScope].forEach(item => {
@@ -47,35 +54,40 @@ function _handleEvent(event) {
 
     const chunks = _splitKeys(key);
     chunks.forEach(chunk => {
-      if (chunk === splitValue) {
-        _dispatch(handler, chunk, keydown, keyup, event);
-      } else {
-        const composes = _composeKeys(chunk);
-        composes.forEach(subCompose => {
-          _dispatch(handler, subCompose, keydown, keyup, event);
-        })
+      if (_isComposeKey(chunk, splitValue)) {
+        const composes = _composeKeys(chunk, splitValue);
+        if (_isKeyMatch(composes)) {
+          _dispatch(handler, keydown, keyup, event);
+        }
+      } else if (_isKeyMatch(chunk)) {
+        _dispatch(handler, keydown, keyup, event);
       }
     });
   });
 }
 
-function _dispatch(handler, triggerKey, keydown, keyup, event) {
-  const {type} = event;
-  const pressedKeyString = _pressedKeys.join('');
-  if (_getKey(pressedKeyString) === _getKey(triggerKey)) {
-    if ((type === 'keydown' && keydown) || (type === 'keyup' && keyup)) {
-      handler.call(this, event);
-    }
+function _dispatch(handler, keydown, keyup, event) {
+  const {
+    type
+  } = event;
+  if ((type === 'keydown' && keydown) || (type === 'keyup' && keyup)) {
+    handler.call(this, event);
   }
 }
 
 function _updatePressedKeys(event) {
-  const {type, key, repeat} = event;
+  const {
+    type,
+    key,
+    repeat
+  } = event;
   if (type === 'keydown' && !repeat) {
     _pressedKeys.push(key);
   }
   if (type === 'keyup') {
-    removeFromArray(_pressedKeys, key);
+    queueMicrotask(() => {
+      removeFromArray(_pressedKeys, key);
+    });
   }
 }
 
@@ -182,4 +194,11 @@ export function setScope(scope) {
 export function deleteScope(scope) {
   _handlerMap.delete(scope);
   _curScope = 'default';
+}
+
+export default {
+  subscribe,
+  getScope,
+  setScope,
+  deleteScope,
 }
