@@ -158,12 +158,9 @@ export function subscribe(key, handler, options) {
   _list.push(_item);
 
   return () => {
-    const _scopeMap = _handlerMap.get(_scope);
-    if (_scopeMap) {
-      const _list = _scopeMap.get(_key);
-      if (_list) {
-        removeFromArray(_list, _item);
-      }
+    const _list = _handlerMap.get(_scope);
+    if (_list) {
+      removeFromArray(_list, _item);
     }
   };
 }
@@ -184,12 +181,27 @@ export function setScope(scope) {
   if (!isString(scope)) {
     throw new Error("scope must be string");
   }
-  this._curScope = scope;
+  _curScope = scope;
 }
 
+/**
+ * @desc Delete the scope. But it will not success when the scope is * 
+ * @param {string} scope
+ */
 export function deleteScope(scope) {
-  _handlerMap.delete(scope);
-  _curScope = "default";
+  if (scope !== '*') {
+    _handlerMap.delete(scope);
+    _curScope = "default";
+  }
+}
+
+/**
+ * @desc Clear all listener.
+ */
+export function clearAll() {
+  _handlerMap.clear();
+  _handlerMap.set("*", []);
+  _curScope = 'default';
 }
 
 export default {
