@@ -202,6 +202,7 @@ export function clearAll() {
   _handlerMap.clear();
   _handlerMap.set("*", []);
   _curScope = 'default';
+  _pressedKeys.length = 0;
 }
 
 export default {

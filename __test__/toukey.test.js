@@ -141,23 +141,31 @@ describe('Ubsubscribe', () => {
 });
 
 describe('Arrow', () => {
-  test('Arrow', () => {
+  test('ArrowLeft', () => {
     subscribe('left', e => {
       expect(e.key.toLowerCase()).toBe('arrowleft');
     });
+    triggerKey('ArrowLeft');
+  });
+
+  test('ArrowRight', () => {
     subscribe('right', e => {
       expect(e.key.toLowerCase()).toBe('arrowright');
     });
+    triggerKey('ArrowRight');
+  });
+
+  test('ArrowUp', () => {
     subscribe('up', e => {
       expect(e.key.toLowerCase()).toBe('arrowup');
     });
+    triggerKey('ArrowUp');
+  });
+
+  test('ArrowBottom', () => {
     subscribe('bottom', e => {
       expect(e.key.toLowerCase()).toBe('arrowdown');
     });
-
-    triggerKey('ArrowLeft');
-    triggerKey('ArrowRight');
-    triggerKey('ArrowUp');
     triggerKey('ArrowBottom');
   });
 });
@@ -178,7 +186,7 @@ describe('Invalid arguments', () => {
 
 describe("Valid options", () => {
   test('Options is string', () => {
-    subscribe('space', () => {
+    subscribe('space', (e) => {
       expect(e.key.toLowerCase()).toBe('space');
     }, 'main');
 
