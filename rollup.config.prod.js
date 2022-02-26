@@ -3,7 +3,7 @@ import fileSize from "rollup-plugin-filesize";
 import { terser } from "rollup-plugin-terser";
 
 export default {
-  input: "index.js",
+  input: "src/index.js",
   output: [
     {
       file: "./dist/toukey.cjs.min.js",

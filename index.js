@@ -1,3 +1,7 @@
-import toukey from "./src/index";
+'use strict';
 
-export default toukey;
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./dist/toukey.min.js');
+} else {
+  module.exports = require('./dist/toukey.js');
+}

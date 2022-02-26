@@ -1,1 +1,341 @@
-function t(t){return function(t){if(Array.isArray(t))return e(t)}(t)||function(t){if("undefined"!=typeof Symbol&&null!=t[Symbol.iterator]||null!=t["@@iterator"])return Array.from(t)}(t)||function(t,r){if(!t)return;if("string"==typeof t)return e(t,r);var n=Object.prototype.toString.call(t).slice(8,-1);"Object"===n&&t.constructor&&(n=t.constructor.name);if("Map"===n||"Set"===n)return Array.from(t);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return e(t,r)}(t)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function e(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function r(t){switch(t){case"ctrl":return"Control";case"left":return"ArrowLeft";case"right":return"ArrowRight";case"up":return"ArrowUp";case"bottom":return"ArrowBottom";default:return t}}function n(t){return"string"==typeof t}function o(t,e){var r=t.indexOf(e);-1!==r&&t.splice(r,1)}function u(t){return t.replace(/\s+/g,"")}function i(t){return t.toLowerCase()}var a="default",c=!0,f=[],s=new Map;function l(t){return Array.isArray(t)?i(t.map((function(t){return r(t)})).sort().join(""))===i(f.join("")):1===f.length&&i(f[0])===r(t)}function p(e){!function(t){var e=t.type,r=t.key,n=t.repeat;"keydown"!==e||n||f.push(r);"keyup"===e&&queueMicrotask((function(){o(f,r)}))}(e);var r=s.get("*")||[],n=s.get(a)||[];[].concat(t(r),t(n)).forEach((function(t){var r=t.handler,n=t.keydown,o=t.keyup,i=t.key,a=t.splitValue;u(i).split(",").forEach((function(t){if(function(t,e){return t.split(e).length>1}(t,a)){var i=function(t,e){return u(t).split(e)}(t,a);l(i)&&y(r,n,o,e)}else l(t)&&y(r,n,o,e)}))}))}function y(t,e,r,n){var o=n.type;("keydown"===o&&e||"keyup"===o&&r)&&t.call(this,n)}s.set("*",[]);var d={subscribe:function(t,e,r){if(!n(t))throw new Error("key must be string");if("function"!=typeof e)throw new Error("handler must be function");var u=t,i="default",a="+",f=!1,l=!1;n(r)?i=r:function(t){return"[object Object]"===Object.prototype.toString.call(t)}(r)&&Object.keys(r).forEach((function(t){"scope"===t&&(i=r[t]),"splitValue"===t&&(a=r[t]),"keydown"===t&&(f=!0),"keyup"===t&&(l=!0)})),f||l||(f=!0),c&&(c=!1,document.addEventListener("keydown",p),document.addEventListener("keyup",p)),s.has(i)||s.set(i,[]);var y=s.get(i),d={handler:e,key:u,splitValue:a,keydown:f,keyup:l};return y.push(d),function(){var t=s.get(i);t&&o(t,d)}},getScope:function(){return a},setScope:function(t){if(!n(t))throw new Error("scope must be string");a=t},deleteScope:function(t){"*"!==t&&(s.delete(t),a="default")}};export{d as default};
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+// https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key/Key_Values#modifier_keys
+function transModifierKey(key) {
+  switch (key) {
+    case "ctrl":
+      return "Control";
+
+    case "space":
+      return " ";
+
+    case "left":
+      return "ArrowLeft";
+
+    case "right":
+      return "ArrowRight";
+
+    case "up":
+      return "ArrowUp";
+
+    case "bottom":
+      return "ArrowBottom";
+
+    default:
+      return key;
+  }
+}
+
+/**
+ * @desc Return true if value is a string
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isString(value) {
+  return typeof value === "string";
+}
+/**
+ * @desc Return true if value is a function
+ * @param {*} value
+ * @returns {boolean}
+ */
+
+function isFunction(value) {
+  return typeof value === "function";
+}
+/**
+ * @desc Return true if value is a object
+ * @param {*} value
+ * @returns {boolean}
+ */
+
+function isObject(value) {
+  return Object.prototype.toString.call(value) === "[object Object]";
+}
+/**
+ * @desc Remove item from array.
+ * @param {Array} array
+ * @param {*} item
+ */
+
+function removeFromArray(array, item) {
+  var index = array.indexOf(item);
+
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
+}
+/**
+ * @desc Remove all blank of str
+ * @param {string} str
+ * @returns
+ */
+
+function filterBlank(str) {
+  return str.replace(/\s+/g, "");
+}
+/**
+ * @desc Retrun the lowercase of value.
+ * @param {string} value
+ * @returns {string}
+ */
+
+function lowerCase(value) {
+  return value.toLowerCase();
+}
+
+var KEY_DOWN = "keydown";
+var KEY_UP = "keyup";
+var _curScope = "default";
+var _shouldBindToDocument = true;
+var _pressedKeys = [];
+
+var _handlerMap = new Map();
+
+_handlerMap.set("*", []);
+
+function _splitKeys(keys) {
+  return filterBlank(keys).split(",");
+}
+
+function _composeKeys(keys, subStr) {
+  return filterBlank(keys).split(subStr);
+}
+
+function _isComposeKey(key, subStr) {
+  return key.split(subStr).length > 1;
+}
+
+function _isKeyMatch(key) {
+  if (Array.isArray(key)) {
+    return lowerCase(key.map(function (value) {
+      return transModifierKey(value);
+    }).sort().join("")) === lowerCase(_pressedKeys.join(""));
+  } else {
+    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === transModifierKey(key);
+  }
+}
+
+function _clearPressedKeys() {
+  _pressedKeys.length = 0;
+}
+
+function _handleEvent(event) {
+  _updatePressedKeys(event);
+
+  var listForAll = _handlerMap.get("*") || [];
+  var listForScope = _handlerMap.get(_curScope) || [];
+  [].concat(_toConsumableArray(listForAll), _toConsumableArray(listForScope)).forEach(function (item) {
+    var handler = item.handler,
+        keydown = item.keydown,
+        keyup = item.keyup,
+        key = item.key,
+        splitValue = item.splitValue;
+
+    var chunks = _splitKeys(key);
+
+    chunks.forEach(function (chunk) {
+      if (_isComposeKey(chunk, splitValue)) {
+        var composes = _composeKeys(chunk, splitValue);
+
+        if (_isKeyMatch(composes)) {
+          _dispatch(handler, keydown, keyup, event);
+        }
+      } else if (_isKeyMatch(chunk)) {
+        _dispatch(handler, keydown, keyup, event);
+      }
+    });
+  });
+}
+
+function _dispatch(handler, keydown, keyup, event) {
+  var type = event.type;
+
+  if (type === "keydown" && keydown || type === "keyup" && keyup) {
+    handler.call(this, event);
+  }
+}
+
+function _updatePressedKeys(event) {
+  var type = event.type,
+      key = event.key,
+      repeat = event.repeat;
+
+  if (type === "keydown" && !repeat) {
+    _pressedKeys.push(key);
+  }
+
+  if (type === "keyup") {
+    queueMicrotask(function () {
+      removeFromArray(_pressedKeys, key);
+    });
+  }
+}
+/**
+ * @desc Subscribe the key's keyboard event.
+ * @param {string} key
+ * @param {function} handler - Callback.
+ * @param {string | object} options - If the options is a string. It will be the scope.
+ * @param {string} options.scope
+ * @param {string} options.splitValue
+ * @param {boolean} options.keydown
+ * @param {boolean} options.keyup
+ * @returns {function} - Unsubscribe key's keyboard event.
+ */
+
+
+function subscribe(key, handler, options) {
+  if (!isString(key)) {
+    throw new Error("key must be string");
+  }
+
+  if (!isFunction(handler)) {
+    throw new Error("handler must be function");
+  }
+
+  var _key = key;
+  var _scope = "default";
+  var _splitValue = "+";
+  var _shouldHandleInKeydown = false;
+  var _shouldHandleInKeyup = false;
+
+  if (isString(options)) {
+    _scope = options;
+  } else if (isObject(options)) {
+    Object.keys(options).forEach(function (key) {
+      if (key === "scope") {
+        _scope = options[key];
+      }
+
+      if (key === "splitValue") {
+        _splitValue = options[key];
+      }
+
+      if (key === KEY_DOWN) {
+        _shouldHandleInKeydown = true;
+      }
+
+      if (key === KEY_UP) {
+        _shouldHandleInKeyup = true;
+      }
+    });
+  }
+
+  if (!_shouldHandleInKeydown && !_shouldHandleInKeyup) {
+    _shouldHandleInKeydown = true;
+  }
+
+  if (_shouldBindToDocument) {
+    _shouldBindToDocument = false;
+    document.addEventListener("keydown", _handleEvent);
+    document.addEventListener("keyup", _handleEvent);
+    window.addEventListener("focus", _clearPressedKeys);
+    window.addEventListener("blur", _clearPressedKeys);
+  }
+
+  if (!_handlerMap.has(_scope)) {
+    _handlerMap.set(_scope, []);
+  }
+
+  var _list = _handlerMap.get(_scope);
+
+  var _item = {
+    handler: handler,
+    key: _key,
+    splitValue: _splitValue,
+    keydown: _shouldHandleInKeydown,
+    keyup: _shouldHandleInKeyup
+  };
+
+  _list.push(_item);
+
+  return function () {
+    var _list = _handlerMap.get(_scope);
+
+    if (_list) {
+      removeFromArray(_list, _item);
+    }
+  };
+}
+/**
+ * @desc Return the scope
+ * @returns {string}
+ */
+
+
+function getScope() {
+  return _curScope;
+}
+/**
+ * @desc Set the scope.
+ * @param {string} scope
+ */
+
+
+function setScope(scope) {
+  if (!isString(scope)) {
+    throw new Error("scope must be string");
+  }
+
+  _curScope = scope;
+}
+/**
+ * @desc Delete the scope. But it will not success when the scope is *
+ * @param {string} scope
+ */
+
+
+function deleteScope(scope) {
+  if (scope !== "*") {
+    _handlerMap["delete"](scope);
+
+    _curScope = "default";
+  }
+}
+/**
+ * @desc Clear all listener.
+ */
+
+
+function clearAll() {
+  _handlerMap.clear();
+
+  _handlerMap.set("*", []);
+
+  _curScope = "default";
+
+  this._clearPressedKeys();
+}
+
+export { clearAll, deleteScope, getScope, setScope, subscribe };

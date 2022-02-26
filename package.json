@@ -1,15 +1,16 @@
 {
   "name": "toukey",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Toukey is a Javascript library for keyboard shortcuts",
-  "main": "dist/toukey.js",
+  "main": "index.js",
   "scripts": {
-    "demo": "npx rollup -c rollup.config.dev.js -w",
-    "build": "npx rollup -c rollup.config.prod.js",
+    "demo": "npx rollup -c rollup.config.demo.js -w",
+    "build:dev": "npx rollup -c rollup.config.dev.js",
+    "build:prod": "npx rollup -c rollup.config.prod.js",
     "prettier": "npx prettier * --write",
     "lint": "npx eslint src/* --fix",
     "test": "jest",
-    "publish": "npm run build && npm publish"
+    "publish": "npm run build:dev && npm run build:prod && npm publish"
   },
   "keywords": [
     "keyboard",
@@ -20,6 +21,9 @@
     "keydown",
     "keyup",
     "library "
+  ],
+  "files": [
+    "dist"
   ],
   "author": "Yukiniro",
   "license": "MIT",

@@ -1,10 +1,7 @@
 import { babel } from "@rollup/plugin-babel";
-import server from "rollup-plugin-serve";
-import livereload from "rollup-plugin-livereload";
-import fileSize from "rollup-plugin-filesize";
 
 export default {
-  input: "index.js",
+  input: "src/index.js",
   output: [
     {
       file: "./dist/toukey.cjs.js",
@@ -25,22 +22,9 @@ export default {
     }
   ],
   plugins: [
-    livereload(),
-    server({
-      open: false,
-      host: "localhost",
-      port: 8080,
-      contentBase: [""],
-      openPage: "/demo/index.html"
-    }),
     babel({
       babelHelpers: "bundled",
       presets: ["@babel/preset-env"]
-    }),
-    fileSize()
-  ],
-  watch: {
-    include: "src/**/*, demo/index.js",
-    clearScreen: false
-  }
+    })
+  ]
 };

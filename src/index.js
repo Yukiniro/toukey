@@ -47,6 +47,10 @@ function _isKeyMatch(key) {
   }
 }
 
+function _clearPressedKeys() {
+  _pressedKeys.length = 0;
+}
+
 function _handleEvent(event) {
   _updatePressedKeys(event);
   const listForAll = _handlerMap.get("*") || [];
@@ -98,7 +102,7 @@ function _updatePressedKeys(event) {
  * @param {boolean} options.keyup
  * @returns {function} - Unsubscribe key's keyboard event.
  */
-export function subscribe(key, handler, options) {
+function subscribe(key, handler, options) {
   if (!isString(key)) {
     throw new Error("key must be string");
   }
@@ -140,6 +144,8 @@ export function subscribe(key, handler, options) {
     _shouldBindToDocument = false;
     document.addEventListener("keydown", _handleEvent);
     document.addEventListener("keyup", _handleEvent);
+    window.addEventListener("focus", _clearPressedKeys);
+    window.addEventListener("blur", _clearPressedKeys);
   }
 
   if (!_handlerMap.has(_scope)) {
@@ -169,7 +175,7 @@ export function subscribe(key, handler, options) {
  * @desc Return the scope
  * @returns {string}
  */
-export function getScope() {
+function getScope() {
   return _curScope;
 }
 
@@ -177,7 +183,7 @@ export function getScope() {
  * @desc Set the scope.
  * @param {string} scope
  */
-export function setScope(scope) {
+function setScope(scope) {
   if (!isString(scope)) {
     throw new Error("scope must be string");
   }
@@ -185,11 +191,11 @@ export function setScope(scope) {
 }
 
 /**
- * @desc Delete the scope. But it will not success when the scope is * 
+ * @desc Delete the scope. But it will not success when the scope is *
  * @param {string} scope
  */
-export function deleteScope(scope) {
-  if (scope !== '*') {
+function deleteScope(scope) {
+  if (scope !== "*") {
     _handlerMap.delete(scope);
     _curScope = "default";
   }
@@ -198,16 +204,11 @@ export function deleteScope(scope) {
 /**
  * @desc Clear all listener.
  */
-export function clearAll() {
+function clearAll() {
   _handlerMap.clear();
   _handlerMap.set("*", []);
-  _curScope = 'default';
-  _pressedKeys.length = 0;
+  _curScope = "default";
+  this._clearPressedKeys();
 }
 
-export default {
-  subscribe,
-  getScope,
-  setScope,
-  deleteScope
-};
+export { clearAll, subscribe, getScope, setScope, deleteScope };

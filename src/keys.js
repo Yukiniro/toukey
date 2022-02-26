@@ -23,6 +23,8 @@ export function transModifierKey(key) {
   switch (key) {
     case "ctrl":
       return "Control";
+    case "space":
+      return " ";
     case "left":
       return "ArrowLeft";
     case "right":
