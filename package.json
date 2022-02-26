@@ -9,7 +9,7 @@
     "prettier": "npx prettier * --write",
     "lint": "npx eslint src/* --fix",
     "test": "jest",
-    "publish": "npm build && publish"
+    "publish": "npm run build && npm publish"
   },
   "keywords": [
     "keyboard",
