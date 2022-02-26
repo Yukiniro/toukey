@@ -1,13 +1,15 @@
 {
   "name": "toukey",
   "version": "0.0.1",
-  "description": "toukey is a Javascript library for keyboard shortcuts",
-  "main": "index.js",
+  "description": "Toukey is a Javascript library for keyboard shortcuts",
+  "main": "dist/toukey.js",
   "scripts": {
-    "demo": "npx rollup -c -w",
+    "demo": "npx rollup -c rollup.config.dev.js -w",
+    "build": "npx rollup -c rollup.config.prod.js",
     "prettier": "npx prettier * --write",
     "lint": "npx eslint src/* --fix",
-    "test": "jest"
+    "test": "jest",
+    "publish": "npm build && publish"
   },
   "keywords": [
     "keyboard",
@@ -38,6 +40,7 @@
     "rollup": "^2.67.3",
     "rollup-plugin-filesize": "^9.1.2",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^1.1.0"
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
