@@ -23,6 +23,11 @@
   ],
   "author": "Yukiniro",
   "license": "MIT",
+  "homepage": "https://github.com/Yukiniro/toukey",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yukiniro/toukey.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
