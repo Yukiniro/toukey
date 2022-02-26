@@ -1,0 +1,147 @@
+# Toukey
+
+`Toukey` is a simple and efficient keyboard events library.
+
+## Install
+
+```shell
+npm i toukey
+```
+
+## User
+
+### Basic User
+
+```javascript
+import { subscribe } from 'toukey';
+
+subscribe('scope', () => {
+  console.log('scope');
+});
+```
+
+### Key
+
+The `subscribe` interface returns a function that can be called to cancel the current event listener.
+
+```javascript
+import { subscribe } from 'toukey';
+
+const unsubscribe = subscribe('scope', () => {
+  console.log('scope');
+});
+
+unsubscribe();
+```
+
+### Multiple Key
+
+Multiple event listeners can be created at once when using `toukey`.
+
+```javascript
+import { subscribe } from 'toukey';
+
+subscribe('scope, a', () => {
+  console.log('scope or a');
+});
+```
+
+### Compose key
+
+Through `'+'`, you can monitor the key combination, and you can also customize the key combination separator.
+
+```javascript
+import { subscribe } from 'toukey';
+
+subscribe('ctrl+a', () => {
+  console.log('ctrl+a');
+});
+```
+
+### Scope
+
+When calling, the third parameter can specify the scope of the event. `"default"` is the default scope.
+
+```javascript
+import { subscribe, setScope } from 'toukey';
+
+const defaultHandler = () => {
+  console.log('scope in default');
+};
+
+const subHandler = () => {
+  console.log('scope in sub');
+};
+
+subscribe('scope', defaultHandler, 'default');
+subscribe('scope', subHandler, { scope: 'sub' });
+```
+
+#### setScope
+
+The current effective scope can be set through the `setScope` interface.
+
+```javascript
+import { setScope } from 'toukey';
+
+setScope('sub');
+```
+
+#### getScope
+
+The current effective scope can be obtained through the `getScope` interface.
+
+```javascript
+import { getScope } from 'toukey';
+
+console.log(getScope());
+```
+
+#### deleteScope
+
+The specified scope can be deleted through the `deleteScope` interface.
+
+```javascript
+import { deleteScope } from 'toukey';
+
+deleteScope('main');
+```
+
+#### Special scope *
+
+If `scope` is specified as `"*"`, the listener function will ignore the `scope` setting.
+
+```javascript
+import { subscribe, setScope } from 'toukey';
+
+const handler = () => {
+  console.log('scope in default');
+};
+
+const subHandler = () => {
+  console.log('scope in sub');
+};
+
+subscribe('scope', defaultHandler, '*');
+subscribe('scope', subHandler, 'sub');
+setScope('sub');
+```
+
+### keydown and keyup
+
+You can set the type for handler call.
+
+```javascript
+import { subscribe, setScope } from 'toukey';
+
+const downHandler = () => {
+  console.log('scope keydown');
+};
+
+const upHandler = () => {
+  console.log('scope keyup');
+};
+
+subscribe('scope', downHandler, {'keydown'});
+subscribe('scope', upHandler, {'keyup'});
+```
