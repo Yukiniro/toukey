@@ -145,3 +145,13 @@ const upHandler = () => {
 subscribe('space', downHandler, {'keydown'});
 subscribe('space', upHandler, {'keyup'});
 ```
+
+### clearAll
+
+可以通过  `clearAll()`  清除所有侦听器
+
+```javascript
+import { clearAll } from 'toukey';
+
+clearAll();
+```

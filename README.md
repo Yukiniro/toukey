@@ -1,5 +1,9 @@
 # Toukey
 
+![npm](https://img.shields.io/npm/v/toukey)
+![GitHub](https://img.shields.io/github/license/yukiniro/toukey)
+![npm bundle size](https://img.shields.io/bundlephobia/min/toukey)
+
 `Toukey` is a simple and efficient keyboard events library.
 
 ## Install
@@ -144,4 +148,14 @@ const upHandler = () => {
 
 subscribe('scope', downHandler, {'keydown'});
 subscribe('scope', upHandler, {'keyup'});
+```
+
+### clearAll
+
+You could clear all listeners by the `clearAll()`
+
+```javascript
+import { clearAll } from 'toukey';
+
+clearAll();
 ```

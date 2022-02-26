@@ -1,6 +1,6 @@
 {
   "name": "toukey",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Toukey is a Javascript library for keyboard shortcuts",
   "main": "index.js",
   "scripts": {
