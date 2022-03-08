@@ -10,6 +10,19 @@ npm i toukey
 
 ## 使用
 
+### 浏览器
+
+你可以在浏览器中通过 [UNPKG](https://unpkg.com/browse/toukey/dist/) | [jsDelivr](https://www.jsdelivr.com/package/npm/toukey) 这些 `cdn` 进行使用。
+
+```javascript
+<script src="https://unpkg.com/toukey/dist/toukey.umd.min.js"></script>
+<script>
+  toukey.subscribe('space', function() {
+    console.log('space');
+  });
+</script>
+```
+
 ### 基本使用
 
 ```javascript
