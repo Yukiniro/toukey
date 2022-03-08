@@ -9,12 +9,12 @@
 ## Install
 
 ```shell
-npm i toukey
+npm i toukey --save
 ```
 
-## User
+## Use
 
-### Basic User
+### Basic Use
 
 ```javascript
 import { subscribe } from 'toukey';
@@ -24,7 +24,7 @@ subscribe('scope', () => {
 });
 ```
 
-### Key
+### Unsubscribe
 
 The `subscribe` interface returns a function that can be called to cancel the current event listener.
 
