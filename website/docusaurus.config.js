@@ -1,82 +1,74 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Toukey.js',
-  tagline: '👻 Toukey is a simple and efficient keyboard events library.',
-  url: 'https://github.com/Yukiniro/toukey',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  title: "Toukey.js",
+  tagline: "👻 Toukey is a simple and efficient keyboard events library.",
+  url: "https://github.com/Yukiniro/toukey",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
   // favicon: 'img/favicon.ico',
-  organizationName: 'Yukiniro', // Usually your GitHub org/user name.
-  projectName: 'toukey', // Usually your repo name.
+  organizationName: "Yukiniro", // Usually your GitHub org/user name.
+  projectName: "toukey", // Usually your repo name.
 
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          sidebarPath: require.resolve("./sidebars.js")
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
-    ],
+          customCss: require.resolve("./src/css/custom.css")
+        }
+      })
+    ]
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Toukey.js',
+        title: "Toukey.js",
         items: [
-          // {
-          //   type: 'doc',
-          //   docId: 'intro',
-          //   position: 'left',
-          //   label: 'Tutorial',
-          // },
           {
-            href: 'https://github.com/Yukiniro/toukey',
-            label: 'GitHub',
-            position: 'right',
+            type: "doc",
+            docId: "intro",
+            position: "left",
+            label: "Tutorial"
           },
-        ],
+          {
+            href: "https://github.com/Yukiniro/toukey",
+            label: "GitHub",
+            position: "right"
+          }
+        ]
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            label: 'Tutorial',
-            to: '/docs/intro',
+            label: "Tutorial",
+            to: "/docs/intro"
           },
           {
-            label: 'GitHub',
-            href: 'https://github.com/Yukiniro/toukey',
-          },
+            label: "GitHub",
+            href: "https://github.com/Yukiniro/toukey"
+          }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Toukey, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Toukey, Inc. Built with Docusaurus.`
       },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-      },
-    }),
+        darkTheme: darkCodeTheme
+      }
+    })
 };
 
 module.exports = config;

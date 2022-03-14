@@ -12,6 +12,10 @@ const FeatureList = [
     title: "Tiny and No-dependence",
     description:
       "Toukey has no dependencies and is tiny (minimum size: 2.81 KB)(Gzipped Size: 1.27 KB)."
+  },
+  {
+    title: "Browser & Npm Support",
+    description: "You could download and link toukey.js in your HTML. And also use it by the npm in your project"
   }
 ];
 

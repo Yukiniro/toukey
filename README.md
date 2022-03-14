@@ -16,7 +16,7 @@ npm i toukey --save
 
 ### Browser
 
-Yout could download and link **toukey.js** in your HTML, It can also be downloaded via [UNPKG](https://unpkg.com/browse/toukey/dist/) | [jsDelivr](https://www.jsdelivr.com/package/npm/toukey)
+You could download and link **toukey.js** in your HTML, It can also be downloaded via [UNPKG](https://unpkg.com/browse/toukey/dist/) | [jsDelivr](https://www.jsdelivr.com/package/npm/toukey)
 
 ```javascript
 <script src="https://unpkg.com/toukey/dist/toukey.umd.min.js"></script>
