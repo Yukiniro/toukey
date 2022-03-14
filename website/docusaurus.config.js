@@ -67,13 +67,6 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme
-      },
-      algolia: {
-        appId: "VNOZXOIKMI",
-        apiKey: "4b6ccbc725955dbefc9d7c3d4875b655",
-        indexName: "prod_toukey",
-        contextualSearch: true,
-        searchPagePath: "search"
       }
     })
 };
