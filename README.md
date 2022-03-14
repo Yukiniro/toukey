@@ -4,7 +4,7 @@
 ![GitHub](https://img.shields.io/github/license/yukiniro/toukey)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/toukey)
 
-`Toukey` is a simple and efficient keyboard events library.
+`Toukey` is a simple and efficient keyboard events library. That's [toukey's](https://toukey.vercel.app/) doc site.
 
 ## Install
 

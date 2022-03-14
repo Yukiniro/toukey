@@ -1,6 +1,6 @@
 # Toukey
 
-`Toukey` 是一个简单、高效的键盘事件库。
+`Toukey` 是一个简单、高效的键盘事件库。这里是[toukey](https://toukey.vercel.app/)的文档网站 [toukey's]。
 
 ## 安装
 
