@@ -149,7 +149,7 @@
         return transModifierKey(value);
       }).sort().join("")) === lowerCase(_pressedKeys.join(""));
     } else {
-      return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === transModifierKey(key);
+      return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === lowerCase(transModifierKey(key));
     }
   }
 
@@ -341,7 +341,7 @@
 
     _curScope = "default";
 
-    this._clearPressedKeys();
+    _clearPressedKeys();
   }
 
   exports.clearAll = clearAll;

@@ -143,7 +143,7 @@ function _isKeyMatch(key) {
       return transModifierKey(value);
     }).sort().join("")) === lowerCase(_pressedKeys.join(""));
   } else {
-    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === transModifierKey(key);
+    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === lowerCase(transModifierKey(key));
   }
 }
 
@@ -335,7 +335,7 @@ function clearAll() {
 
   _curScope = "default";
 
-  this._clearPressedKeys();
+  _clearPressedKeys();
 }
 
 export { clearAll, deleteScope, getScope, setScope, subscribe };
