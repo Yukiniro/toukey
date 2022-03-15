@@ -1,6 +1,6 @@
 {
   "name": "toukey",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Toukey is a Javascript library for keyboard shortcuts",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,9 @@
     "build:prod": "npx rollup -c rollup.config.prod.js",
     "prettier": "npx prettier * --write",
     "lint": "npx eslint src/* --fix",
-    "test": "jest",
+    "test": "npx vitest",
+    "test:run": "npx vitest run",
+    "test:coverrage": "npx vitest --coverage",
     "publish": "npm run build:dev && npm run build:prod && npm publish"
   },
   "keywords": [
@@ -37,19 +39,23 @@
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "@rollup/plugin-babel": "^5.3.0",
+    "c8": "^7.11.0",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
+    "happy-dom": "^2.47.2",
     "jest": "^27.5.1",
+    "jsdom": "^19.0.0",
     "prettier": "^2.5.1",
     "prettier-eslint": "^13.0.0",
     "rollup": "^2.67.3",
     "rollup-plugin-filesize": "^9.1.2",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-serve": "^1.1.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "vitest": "^0.6.1"
   }
 }

@@ -42,7 +42,7 @@ function _isKeyMatch(key) {
   } else {
     return (
       _pressedKeys.length === 1 &&
-      lowerCase(_pressedKeys[0]) === transModifierKey(key)
+      lowerCase(_pressedKeys[0]) === lowerCase(transModifierKey(key))
     );
   }
 }
@@ -208,7 +208,7 @@ function clearAll() {
   _handlerMap.clear();
   _handlerMap.set("*", []);
   _curScope = "default";
-  this._clearPressedKeys();
+  _clearPressedKeys();
 }
 
 export { clearAll, subscribe, getScope, setScope, deleteScope };

@@ -1,7 +1,16 @@
-import { isString, isFunction, isObject, isUndefined, removeFromArray, filterBlank, lowerCase } from "../src/util";
+import {
+  isString,
+  isFunction,
+  isObject,
+  isUndefined,
+  removeFromArray,
+  filterBlank,
+  lowerCase
+} from "../src/util";
+import { test, expect } from "vitest";
 
 test("Test isString", () => {
-  expect(isString('hello world')).toBe(true);
+  expect(isString("hello world")).toBe(true);
   expect(isString(1)).toBe(false);
   expect(isString(true)).toBe(false);
   expect(isString({})).toBe(false);
@@ -12,7 +21,7 @@ test("Test isString", () => {
 });
 
 test("Test isFunction", () => {
-  expect(isFunction('hello world')).toBe(false);
+  expect(isFunction("hello world")).toBe(false);
   expect(isFunction(1)).toBe(false);
   expect(isFunction(true)).toBe(false);
   expect(isFunction({})).toBe(false);
@@ -23,7 +32,7 @@ test("Test isFunction", () => {
 });
 
 test("Test isObject", () => {
-  expect(isObject('hello world')).toBe(false);
+  expect(isObject("hello world")).toBe(false);
   expect(isObject(1)).toBe(false);
   expect(isObject(true)).toBe(false);
   expect(isObject({})).toBe(true);
@@ -34,7 +43,7 @@ test("Test isObject", () => {
 });
 
 test("Test isUndefined", () => {
-  expect(isUndefined('hello world')).toBe(false);
+  expect(isUndefined("hello world")).toBe(false);
   expect(isUndefined(1)).toBe(false);
   expect(isUndefined(true)).toBe(false);
   expect(isUndefined({})).toBe(false);
@@ -46,7 +55,7 @@ test("Test isUndefined", () => {
 
 test("Test removeFromArray", () => {
   const arr = [1, 2, 3];
-  removeFromArray(arr, 2)
+  removeFromArray(arr, 2);
   expect(arr).toEqual([1, 3]);
   removeFromArray(arr, true);
   expect(arr).toEqual([1, 3]);
