@@ -69,9 +69,9 @@ const config = {
         darkTheme: darkCodeTheme
       },
       algolia: {
-        appId: 'VNOZXOIKMI',
-        apiKey: '4b6ccbc725955dbefc9d7c3d4875b655',
-        indexName: 'prod_toukey',
+        appId: 'PHCCBLTP03',
+        apiKey: '03735487fd14d6cdd752c678cdb48768',
+        indexName: 'toukey',
         contextualSearch: true,
         externalUrlRegex: 'external\\.com|domain\\.com',
         searchParameters: {},
