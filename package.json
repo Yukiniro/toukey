@@ -4,7 +4,6 @@
   "description": "Toukey is a Javascript library for keyboard shortcuts",
   "main": "index.js",
   "scripts": {
-    "demo": "npx rollup -c rollup.config.demo.js -w",
     "build:dev": "npx rollup -c rollup.config.dev.js",
     "build:prod": "npx rollup -c rollup.config.prod.js",
     "prettier": "npx prettier * --write",
