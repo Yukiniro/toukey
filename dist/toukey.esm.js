@@ -58,50 +58,10 @@ function transModifierKey(key) {
 }
 
 /**
- * @desc Return true if value is a string
- * @param {*} value
- * @returns {boolean}
- */
-function isString(value) {
-  return typeof value === "string";
-}
-/**
- * @desc Return true if value is a function
- * @param {*} value
- * @returns {boolean}
- */
-
-function isFunction(value) {
-  return typeof value === "function";
-}
-/**
- * @desc Return true if value is a object
- * @param {*} value
- * @returns {boolean}
- */
-
-function isObject(value) {
-  return Object.prototype.toString.call(value) === "[object Object]";
-}
-/**
- * @desc Remove item from array.
- * @param {Array} array
- * @param {*} item
- */
-
-function removeFromArray(array, item) {
-  var index = array.indexOf(item);
-
-  if (index !== -1) {
-    array.splice(index, 1);
-  }
-}
-/**
  * @desc Remove all blank of str
  * @param {string} str
  * @returns
  */
-
 function filterBlank(str) {
   return str.replace(/\s+/g, "");
 }
@@ -113,6 +73,70 @@ function filterBlank(str) {
 
 function lowerCase(value) {
   return value.toLowerCase();
+}
+
+/**
+ * @description Check if value is classified as a number.
+ * @param value The value to check.
+ * @returns Returns true if value is a number, else false.
+ */
+/**
+ * @description Check if value is classified as a string.
+ * @param value The value to check.
+ * @returns Returns true if value is a string, else false.
+ */
+
+
+function isString(value) {
+  return typeof value === "string";
+}
+/**
+ * @description Check if value is classified as an object.
+ * @param value The value to check.
+ * @returns Returns true if value is an object, else false.
+ */
+
+
+function isObject(value) {
+  return Object.prototype.toString.call(value) === "[object Object]";
+}
+/**
+ * @description Check if value is classified as an array.
+ * @param value The value to check
+ * @returns Returns true if value is an array, else false.
+ */
+
+
+function isArray(value) {
+  return Array.isArray(value);
+}
+/**
+ * @description Check if value is classified as a function.
+ * @param value The value to check.
+ * @returns Returns true if value is a function, else false.
+ */
+
+
+function isFunction(value) {
+  return Object.prototype.toString.call(value) === "[object Function]";
+}
+/**
+ * @description Removes a specified value or a matching value from an array.
+ * @param array The array to modify.
+ * @param checker The item or the function invoked per iteration.
+ */
+
+
+function remove(array, checker) {
+  if (!isArray(array)) {
+    throw new Error("value must be array");
+  }
+
+  var newArray = array.filter(function (item) {
+    return isFunction(checker) ? !checker(item) : checker !== item;
+  });
+  array.length = 0;
+  array.push.apply(array, newArray);
 }
 
 var KEY_DOWN = "keydown";
@@ -198,7 +222,7 @@ function _updatePressedKeys(event) {
 
   if (type === "keyup") {
     queueMicrotask(function () {
-      removeFromArray(_pressedKeys, key);
+      remove(_pressedKeys, key);
     });
   }
 }
@@ -284,7 +308,7 @@ function subscribe(key, handler, options) {
     var _list = _handlerMap.get(_scope);
 
     if (_list) {
-      removeFromArray(_list, _item);
+      remove(_list, _item);
     }
   };
 }

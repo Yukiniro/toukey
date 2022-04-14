@@ -4,7 +4,7 @@ import {
   getScope,
   setScope,
   subscribe
-} from "../src/index";
+} from "../dist/toukey";
 import { describe, test, afterEach, expect } from "vitest";
 import { KeyboardEvent } from "happy-dom";
 

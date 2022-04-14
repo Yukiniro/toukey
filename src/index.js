@@ -1,12 +1,6 @@
 import { transModifierKey } from "./keys";
-import {
-  isString,
-  isFunction,
-  isObject,
-  removeFromArray,
-  filterBlank,
-  lowerCase
-} from "./util";
+import { filterBlank, lowerCase } from "./util";
+import { isString, isFunction, isObject, remove } from "bittydash";
 
 const KEY_DOWN = "keydown";
 const KEY_UP = "keyup";
@@ -86,7 +80,7 @@ function _updatePressedKeys(event) {
   }
   if (type === "keyup") {
     queueMicrotask(() => {
-      removeFromArray(_pressedKeys, key);
+      remove(_pressedKeys, key);
     });
   }
 }
@@ -166,7 +160,7 @@ function subscribe(key, handler, options) {
   return () => {
     const _list = _handlerMap.get(_scope);
     if (_list) {
-      removeFromArray(_list, _item);
+      remove(_list, _item);
     }
   };
 }
