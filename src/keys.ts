@@ -19,7 +19,7 @@ export const modifierKeys = [
   "AltGr"
 ];
 
-export function transModifierKey(key) {
+export function transModifierKey(key: string): string {
   switch (key) {
     case "ctrl":
       return "Control";

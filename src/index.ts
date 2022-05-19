@@ -1,6 +1,7 @@
 import { transModifierKey } from "./keys";
 import { filterBlank, lowerCase } from "./util";
 import { isString, isFunction, isObject, remove } from "bittydash";
+import { ToukeyOptions } from "./types";
 
 const KEY_DOWN = "keydown";
 const KEY_UP = "keyup";
@@ -11,19 +12,19 @@ const _pressedKeys = [];
 const _handlerMap = new Map();
 _handlerMap.set("*", []);
 
-function _splitKeys(keys) {
+function _splitKeys(keys: string): Array<string> {
   return filterBlank(keys).split(",");
 }
 
-function _composeKeys(keys, subStr) {
+function _composeKeys(keys: string, subStr: string): Array<string> {
   return filterBlank(keys).split(subStr);
 }
 
-function _isComposeKey(key, subStr) {
+function _isComposeKey(key: string, subStr: string): boolean {
   return key.split(subStr).length > 1;
 }
 
-function _isKeyMatch(key) {
+function _isKeyMatch(key: string | Array<string>): boolean {
   if (Array.isArray(key)) {
     return (
       lowerCase(
@@ -41,11 +42,11 @@ function _isKeyMatch(key) {
   }
 }
 
-function _clearPressedKeys() {
+function _clearPressedKeys(): void {
   _pressedKeys.length = 0;
 }
 
-function _handleEvent(event) {
+function _handleEvent(event: KeyboardEvent) {
   _updatePressedKeys(event);
   const listForAll = _handlerMap.get("*") || [];
   const listForScope = _handlerMap.get(_curScope) || [];
@@ -66,14 +67,19 @@ function _handleEvent(event) {
   });
 }
 
-function _dispatch(handler, keydown, keyup, event) {
+function _dispatch(
+  handler: (e: KeyboardEvent) => void,
+  keydown: boolean,
+  keyup: boolean,
+  event: KeyboardEvent
+): void {
   const { type } = event;
   if ((type === "keydown" && keydown) || (type === "keyup" && keyup)) {
     handler.call(this, event);
   }
 }
 
-function _updatePressedKeys(event) {
+function _updatePressedKeys(event: KeyboardEvent) {
   const { type, key, repeat } = event;
   if (type === "keydown" && !repeat) {
     _pressedKeys.push(key);
@@ -96,7 +102,11 @@ function _updatePressedKeys(event) {
  * @param {boolean} options.keyup
  * @returns {function} - Unsubscribe key's keyboard event.
  */
-function subscribe(key, handler, options) {
+function subscribe(
+  key: string,
+  handler: (e?: KeyboardEvent) => void,
+  options: ToukeyOptions
+): () => void {
   if (!isString(key)) {
     throw new Error("key must be string");
   }
@@ -106,7 +116,7 @@ function subscribe(key, handler, options) {
   }
 
   const _key = key;
-  let _scope = "default";
+  let _scope: string | ToukeyOptions = "default";
   let _splitValue = "+";
   let _shouldHandleInKeydown = false;
   let _shouldHandleInKeyup = false;
@@ -169,7 +179,7 @@ function subscribe(key, handler, options) {
  * @desc Return the scope
  * @returns {string}
  */
-function getScope() {
+function getScope(): string {
   return _curScope;
 }
 
@@ -177,7 +187,7 @@ function getScope() {
  * @desc Set the scope.
  * @param {string} scope
  */
-function setScope(scope) {
+function setScope(scope: string) {
   if (!isString(scope)) {
     throw new Error("scope must be string");
   }
@@ -188,7 +198,7 @@ function setScope(scope) {
  * @desc Delete the scope. But it will not success when the scope is *
  * @param {string} scope
  */
-function deleteScope(scope) {
+function deleteScope(scope: string) {
   if (scope !== "*") {
     _handlerMap.delete(scope);
     _curScope = "default";
@@ -198,7 +208,7 @@ function deleteScope(scope) {
 /**
  * @desc Clear all listener.
  */
-function clearAll() {
+function clearAll(): void {
   _handlerMap.clear();
   _handlerMap.set("*", []);
   _curScope = "default";
