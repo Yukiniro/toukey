@@ -2,5 +2,6 @@
   "compilerOptions": {
     "target": "ESNext",
     "declaration": true,
+    "moduleResolution": "node"
   }
 }
