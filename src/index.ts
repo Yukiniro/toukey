@@ -105,7 +105,7 @@ function _updatePressedKeys(event: KeyboardEvent) {
 function subscribe(
   key: string,
   handler: (e?: KeyboardEvent) => void,
-  options: ToukeyOptions
+  options?: ToukeyOptions
 ): () => void {
   if (!isString(key)) {
     throw new Error("key must be string");
