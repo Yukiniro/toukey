@@ -11,9 +11,9 @@
     "build:all": "npm run build:dev && npm run build:prod",
     "prettier": "npx prettier * --write",
     "lint": "npx eslint src/* --fix",
-    "test": "npm run build:all && npx vitest",
-    "test:run": "npm run build:all && npx vitest run",
-    "test:coverrage": "npm run build:all && npx vitest --coverage",
+    "test": "npx vitest",
+    "test:run": "npx vitest run",
+    "test:coverrage": "npx vitest --coverage",
     "publish": "npm run build:all && npm publish"
   },
   "keywords": [
@@ -64,6 +64,6 @@
     "rollup-plugin-typescript2": "^0.31.2",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4",
-    "vitest": "^0.6.1"
+    "vitest": "^0.23.4"
   }
 }

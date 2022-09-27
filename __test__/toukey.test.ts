@@ -1,121 +1,120 @@
-import {
-  clearAll,
-  deleteScope,
-  getScope,
-  setScope,
-  subscribe
-} from "../dist/toukey";
+import { clearAll, deleteScope, getScope, setScope, subscribe } from "../src";
 import { describe, test, afterEach, expect } from "vitest";
 import { KeyboardEvent } from "happy-dom";
 
-function triggerKey(key, options = { keydown: true, keyup: false }) {
+type TriggerEventOptions = { keydown?: true; keyup?: false };
+
+function triggerKey(
+  key: string,
+  options: TriggerEventOptions = { keydown: true }
+) {
   if (options.keydown) {
-    const event = new KeyboardEvent("keydown", { key });
-    document.dispatchEvent(event);
+    const event: KeyboardEvent = new KeyboardEvent("keydown", { key });
+    document.dispatchEvent(event as unknown as Event);
   }
   if (options.keyup) {
     const event = new KeyboardEvent("keyup", { key });
-    document.dispatchEvent(event);
+    document.dispatchEvent(event as unknown as Event);
   }
 }
 
 afterEach(clearAll);
 
 describe("Subscribe single key", () => {
-  test("Test keydown", (done) => {
-    subscribe("a", (e) => {
-      expect(e.key.toLowerCase()).toBe("a");
-      done();
-    });
+  test("Test keydown",
+    () => new Promise<void>((resolve) => {
+      subscribe("a", (e) => {
+        expect(e.key.toLowerCase()).toBe("a");
+        resolve();
+      });
+      triggerKey("a");
+    }));
 
-    triggerKey("a");
-  });
-
-  test("Test keydown", (done) => {
+  test("Test keydown", () => new Promise<void>(resolve => {
     subscribe(
       "c",
       (e) => {
         expect(e.key.toLowerCase()).toBe("c");
-        done();
+        resolve();
       },
       { keydown: true }
     );
 
     triggerKey("c");
-  });
+  }));
 
-  test("Test keyup", (done) => {
+  test("Test keyup", () => new Promise<void>(resolve => {
     subscribe(
       "b",
       (e) => {
         expect(e.key.toLowerCase()).toBe("b");
-        done();
+        resolve();
       },
       { keyup: true }
     );
 
     triggerKey("b", { keydown: true, keyup: true });
-  });
+  }));
 });
 
 describe("Subscribe compose key", () => {
-  test("Keydown", (done) => {
+  test("Keydown", () => new Promise<void>(resolve => {
     subscribe("ctrl+c", (e) => {
       expect(e.key.toLowerCase()).toBe("c");
-      done();
+      resolve();
     });
 
     triggerKey("Control");
     triggerKey("c");
-  });
+  }));
 
-  test("keyup", (done) => {
+  test("keyup", () => new Promise<void>(resolve => {
     subscribe(
       "ctrl+c",
       (e) => {
         expect(e.key.toLowerCase()).toBe("c");
-        done();
+        resolve();
       },
       { keyup: true }
     );
 
     triggerKey("Control");
     triggerKey("c", { keydown: true, keyup: true });
-  });
+  }));
 
-  test("Split", (done) => {
+  test("Split", () => new Promise<void>(resolve => {
     subscribe(
       "ctrl-c",
       (e) => {
         expect(e.key.toLowerCase()).toBe("c");
-        done();
+        resolve();
       },
       { splitValue: "-" }
     );
 
     triggerKey("Control");
     triggerKey("c");
-  });
+  }));
 });
 
 describe("Subscribe multi key", () => {
-  test("Test keydown", (done) => {
+  test("Test keydown", () => new Promise<void>(resolve => {
     subscribe("a,b", (e) => {
       expect(e.key.toLowerCase()).not.toBe("c");
-      done();
+      resolve();
     });
 
     triggerKey("a");
     triggerKey("b");
     triggerKey("c");
-  });
+  }));
 
-  test("Test keyup", (done) => {
+  test("Test keyup", () => new Promise<void>(resolve => {
     subscribe(
       "a,b",
       (e) => {
         expect(e.key.toLowerCase()).not.toBe("c");
-        done();
+        resolve();
       },
       { keyup: true }
     );
@@ -123,48 +122,48 @@ describe("Subscribe multi key", () => {
     triggerKey("a", { keydown: true, keyup: true });
     triggerKey("b", { keydown: true, keyup: true });
     triggerKey("c", { keydown: true, keyup: true });
-  });
+  }));
 });
 
 describe("Scope", () => {
-  test("Set scope", (done) => {
+  test("Set scope", () => new Promise<void>(resolve => {
     subscribe(
       "a",
       (e) => {
         expect(e.key.toLowerCase()).toBe("a");
-        done();
+        resolve();
       },
       { scope: "main" }
     );
 
     setScope("main");
     triggerKey("a");
-  });
+  }));
 
   test("Get scope", () => {
     setScope("main");
     expect(getScope()).toBe("main");
   });
 
-  test("Delete scope", (done) => {
+  test("Delete scope", () => new Promise<void>(resolve => {
     subscribe(
       "a",
       (e) => {
         expect(e.key.toLowerCase()).toBe("a");
-        done();
+        resolve();
       },
       { scope: "default" }
     );
 
     deleteScope("sub");
     triggerKey("a");
-  });
+  }));
 
-  test("* scope", (done) => {
+  test("* scope", () => new Promise<void>(resolve => {
     let count = 0;
     const func = () => {
       if (count === 2) {
-        done();
+        resolve();
       }
     };
 
@@ -193,65 +192,65 @@ describe("Scope", () => {
     setTimeout(() => {
       triggerKey("b", { keydown: true, keyup: true });
     });
-  });
+  }));
 });
 
 describe("Ubsubscribe", () => {
-  test("Test keydown", (done) => {
+  test("Test keydown", () => new Promise<void>(resolve => {
     const ubsubscribe = subscribe("a", (e) => {
       expect(e.key.toLowerCase()).toBe("a");
-      done();
+      resolve();
     });
 
     triggerKey("a");
     expect(ubsubscribe()).toBe(undefined);
-  });
+  }));
 });
 
 describe("Arrow", () => {
-  test("ArrowLeft", (done) => {
+  test("ArrowLeft", () => new Promise<void>(resolve => {
     subscribe("left", (e) => {
       expect(e.key.toLowerCase()).toBe("arrowleft");
-      done();
+      resolve();
     });
     triggerKey("ArrowLeft");
-  });
+  }));
 
-  test("ArrowRight", (done) => {
+  test("ArrowRight", () => new Promise<void>(resolve => {
     subscribe("right", (e) => {
       expect(e.key.toLowerCase()).toBe("arrowright");
-      done();
+      resolve();
     });
     triggerKey("ArrowRight");
-  });
+  }));
 
-  test("ArrowUp", (done) => {
+  test("ArrowUp", () => new Promise<void>(resolve => {
     subscribe("up", (e) => {
       expect(e.key.toLowerCase()).toBe("arrowup");
-      done();
+      resolve();
     });
     triggerKey("ArrowUp");
-  });
+  }));
 
-  test("ArrowBottom", (done) => {
+  test("ArrowBottom", () => new Promise<void>(resolve => {
     subscribe("bottom", (e) => {
       expect(e.key.toLowerCase()).toBe("arrowbottom");
-      done();
+      resolve();
     });
     triggerKey("ArrowBottom");
-  });
+  }));
 });
 
 describe("Invalid arguments", () => {
   test("Set wrong scope", () => {
     expect(() => {
-      setScope(0);
+      setScope(0 as unknown as string);
     }).toThrow("scope must be string");
   });
 
   test("Set wrong key", () => {
     expect(() => {
-      subscribe(0);
+      subscribe(0 as unknown as string, () => {});
     }).toThrow("key must be string");
   });
 
@@ -262,18 +261,20 @@ describe("Invalid arguments", () => {
   });
 });
 
-describe("Valid options", (done) => {
+describe("Valid options", () => {
   test("Options is string", () => {
-    subscribe(
-      "space",
-      (e) => {
-        expect(e.key.toLowerCase()).toBe("space");
-        done();
-      },
-      "main"
-    );
+    return () => new Promise<void>((resolve) => {
+      subscribe(
+        "space",
+        (e) => {
+          expect(e.key.toLowerCase()).toBe("space");
+          resolve();
+        },
+        "main"
+      );
 
-    setScope("main");
-    triggerKey("space");
+      setScope("main");
+      triggerKey("space");
+    });
   });
 });
