@@ -12,11 +12,11 @@ const _pressedKeys = [];
 const _handlerMap = new Map();
 _handlerMap.set("*", []);
 
-function _splitKeys(keys: string): Array<string> {
+function _splitKeys(keys: string): string[] {
   return filterBlank(keys).split(",");
 }
 
-function _composeKeys(keys: string, subStr: string): Array<string> {
+function _composeKeys(keys: string, subStr: string): string[] {
   return filterBlank(keys).split(subStr);
 }
 
@@ -24,7 +24,7 @@ function _isComposeKey(key: string, subStr: string): boolean {
   return key.split(subStr).length > 1;
 }
 
-function _isKeyMatch(key: string | Array<string>): boolean {
+function _isKeyMatch(key: string | string[]): boolean {
   if (Array.isArray(key)) {
     return (
       lowerCase(
@@ -105,7 +105,7 @@ function _updatePressedKeys(event: KeyboardEvent) {
 function subscribe(
   key: string,
   handler: (e?: KeyboardEvent) => void,
-  options?: ToukeyOptions
+  options?: string | ToukeyOptions
 ): () => void {
   if (!isString(key)) {
     throw new Error("key must be string");
