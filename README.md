@@ -32,10 +32,10 @@ You could download and link **toukey.js** in your HTML, It can also be downloade
 You will need `Node.js` installed on your system.
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-subscribe('scope', () => {
-  console.log('scope');
+subscribe("scope", () => {
+  console.log("scope");
 });
 ```
 
@@ -44,10 +44,10 @@ subscribe('scope', () => {
 The `subscribe` interface returns a function that can be called to cancel the current event listener.
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-const unsubscribe = subscribe('scope', () => {
-  console.log('scope');
+const unsubscribe = subscribe("scope", () => {
+  console.log("scope");
 });
 
 unsubscribe();
@@ -58,10 +58,10 @@ unsubscribe();
 Multiple event listeners can be created at once when using `toukey`.
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-subscribe('scope, a', () => {
-  console.log('scope or a');
+subscribe("scope, a", () => {
+  console.log("scope or a");
 });
 ```
 
@@ -70,10 +70,10 @@ subscribe('scope, a', () => {
 Through `'+'`, you can monitor the key combination, and you can also customize the key combination separator.
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-subscribe('ctrl+a', () => {
-  console.log('ctrl+a');
+subscribe("ctrl+a", () => {
+  console.log("ctrl+a");
 });
 ```
 
@@ -82,18 +82,18 @@ subscribe('ctrl+a', () => {
 When calling, the third parameter can specify the scope of the event. `"default"` is the default scope.
 
 ```javascript
-import { subscribe, setScope } from 'toukey';
+import { subscribe, setScope } from "toukey";
 
 const defaultHandler = () => {
-  console.log('scope in default');
+  console.log("scope in default");
 };
 
 const subHandler = () => {
-  console.log('scope in sub');
+  console.log("scope in sub");
 };
 
-subscribe('scope', defaultHandler, 'default');
-subscribe('scope', subHandler, { scope: 'sub' });
+subscribe("scope", defaultHandler, "default");
+subscribe("scope", subHandler, { scope: "sub" });
 ```
 
 #### setScope
@@ -101,9 +101,9 @@ subscribe('scope', subHandler, { scope: 'sub' });
 The current effective scope can be set through the `setScope` interface.
 
 ```javascript
-import { setScope } from 'toukey';
+import { setScope } from "toukey";
 
-setScope('sub');
+setScope("sub");
 ```
 
 #### getScope
@@ -111,7 +111,7 @@ setScope('sub');
 The current effective scope can be obtained through the `getScope` interface.
 
 ```javascript
-import { getScope } from 'toukey';
+import { getScope } from "toukey";
 
 console.log(getScope());
 ```
@@ -121,29 +121,29 @@ console.log(getScope());
 The specified scope can be deleted through the `deleteScope` interface.
 
 ```javascript
-import { deleteScope } from 'toukey';
+import { deleteScope } from "toukey";
 
-deleteScope('main');
+deleteScope("main");
 ```
 
-#### Special scope *
+#### Special scope \*
 
 If `scope` is specified as `"*"`, the listener function will ignore the `scope` setting.
 
 ```javascript
-import { subscribe, setScope } from 'toukey';
+import { subscribe, setScope } from "toukey";
 
 const handler = () => {
-  console.log('scope in default');
+  console.log("scope in default");
 };
 
 const subHandler = () => {
-  console.log('scope in sub');
+  console.log("scope in sub");
 };
 
-subscribe('scope', defaultHandler, '*');
-subscribe('scope', subHandler, 'sub');
-setScope('sub');
+subscribe("scope", defaultHandler, "*");
+subscribe("scope", subHandler, "sub");
+setScope("sub");
 ```
 
 ### keydown and keyup
@@ -170,7 +170,37 @@ subscribe('scope', upHandler, {'keyup'});
 You could clear all listeners by the `clearAll()`
 
 ```javascript
-import { clearAll } from 'toukey';
+import { clearAll } from "toukey";
 
 clearAll();
+```
+
+### enable
+
+You could enable all listeners if the toukey is not enabled.
+
+```javascript
+import { enable } from "toukey";
+
+enable();
+```
+
+### disable
+
+You could disable all listeners.
+
+```javascript
+import { enable } from "toukey";
+
+enable();
+```
+
+### isEnabled
+
+All listeners will be invalid if the `isEnabled` returns false.
+
+```javascript
+import { enable } from "toukey";
+
+console.log(isEnabled());
 ```
