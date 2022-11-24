@@ -8,6 +8,7 @@ const KEY_UP = "keyup";
 
 let _curScope = "default";
 let _shouldBindToDocument = true;
+let _isEnabled = true;
 const _pressedKeys = [];
 const _handlerMap = new Map();
 _handlerMap.set("*", []);
@@ -48,6 +49,11 @@ function _clearPressedKeys(): void {
 
 function _handleEvent(event: KeyboardEvent) {
   _updatePressedKeys(event);
+
+  if (!isEnabled()) {
+    return;
+  }
+
   const listForAll = _handlerMap.get("*") || [];
   const listForScope = _handlerMap.get(_curScope) || [];
   [...listForAll, ...listForScope].forEach((item) => {
@@ -215,4 +221,34 @@ function clearAll(): void {
   _clearPressedKeys();
 }
 
-export { clearAll, subscribe, getScope, setScope, deleteScope };
+/**
+ * @desc Set all listeners enable
+ */
+function enable(): void {
+  _isEnabled = true;
+}
+
+/**
+ * @desc Set all listeners disable
+ */
+function disable(): void {
+  _isEnabled = false;
+}
+
+/**
+ * @desc Return true if toukey is enabled
+ */
+function isEnabled(): boolean {
+  return _isEnabled;
+}
+
+export {
+  clearAll,
+  subscribe,
+  getScope,
+  setScope,
+  deleteScope,
+  enable,
+  disable,
+  isEnabled
+};
