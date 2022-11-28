@@ -7,7 +7,7 @@ specifiers:
   '@rollup/plugin-babel': ^5.3.0
   '@rollup/plugin-commonjs': ^21.0.3
   '@rollup/plugin-node-resolve': ^13.2.0
-  bittydash: ^0.1.1
+  bittydash: ^0.3.0
   c8: ^7.11.0
   eslint: ^8.9.0
   eslint-config-prettier: ^8.4.0
@@ -37,7 +37,7 @@ devDependencies:
   '@rollup/plugin-babel': 5.3.0_itfpcyhctddhhxu2hrnmbxavve
   '@rollup/plugin-commonjs': 21.0.3_rollup@2.67.3
   '@rollup/plugin-node-resolve': 13.2.0_rollup@2.67.3
-  bittydash: 0.1.1
+  bittydash: 0.3.3
   c8: 7.11.0
   eslint: 8.9.0
   eslint-config-prettier: 8.4.0_eslint@8.9.0
@@ -2272,8 +2272,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /bittydash/0.1.1:
-    resolution: {integrity: sha512-ZfMy9OJB0Aeo183YclzIhxvCeA3D9aVj5gE3STBg+sOsBzKkZmjXvIbvq8FHNvDRjcF7CcwF9yRnu5ylVd9MyQ==}
+  /bittydash/0.3.3:
+    resolution: {integrity: sha512-mRTDVjSjPXjjOZUSsJjUvjcyyPO2LNfwA/DKa/TyjycftP1ZQBHsk0GKqZk90lENOJRMOBUNNXbyUsM2SPpbXQ==}
     dev: true
 
   /boxen/5.1.2:
