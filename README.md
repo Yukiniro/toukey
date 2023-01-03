@@ -33,6 +33,27 @@ You could download and link **toukey.js** in your HTML, It can also be downloade
 </script>
 ```
 
+### React
+
+It is easy to use with react.
+
+```javascript
+import { useEffect } from "react";
+import { subscribe } from "toukey";
+
+function App() {
+  useEffect(() => {
+    return subscribe("scope", () => {
+      console.log("scope");
+    });
+  });
+
+  return <div>hello world</div>;
+}
+```
+
+And here is a library named [react-toukey-hook](https://github.com/Yukiniro/react-toukey-hook) which build with toukey for react hook.
+
 ### Basic Use
 
 You will need `Node.js` installed on your system.
@@ -58,25 +79,6 @@ const unsubscribe = subscribe("scope", () => {
 
 unsubscribe();
 ```
-
-It is easy to use with react.
-
-```javascript
-import { useEffect } from "react";
-import { subscribe } from "toukey";
-
-function App() {
-  useEffect(() => {
-    return subscribe("scope", () => {
-      console.log("scope");
-    });
-  });
-
-  return <div>hello world</div>;
-}
-```
-
-And here is a library named [react-toukey-hook](https://github.com/Yukiniro/react-toukey-hook) which build with toukey for react hook.
 
 ### Multiple Key
 

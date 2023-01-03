@@ -23,13 +23,34 @@ npm i toukey
 </script>
 ```
 
+### React
+
+在 react 也很容易.
+
+```javascript
+import { useEffect } from "react";
+import { subscribe } from "toukey";
+
+function App() {
+  useEffect(() => {
+    return subscribe("scope", () => {
+      console.log("scope");
+    });
+  });
+
+  return <div>hello world</div>;
+}
+```
+
+这里有一个基于 `toukey` 制作的 react hook 的库 [react-toukey-hook](https://github.com/Yukiniro/react-toukey-hook)。
+
 ### 基本使用
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-subscribe('space', () => {
-  console.log('space');
+subscribe("space", () => {
+  console.log("space");
 });
 ```
 
@@ -38,10 +59,10 @@ subscribe('space', () => {
 `subscribe` 接口会返回一个函数，调用该函数可以取消当前的事件监听。
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-const unsubscribe = subscribe('space', () => {
-  console.log('space');
+const unsubscribe = subscribe("space", () => {
+  console.log("space");
 });
 
 unsubscribe();
@@ -52,10 +73,10 @@ unsubscribe();
 使用 `toukey` 时可以一次性创建多个事件监听。
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-subscribe('space, a', () => {
-  console.log('space or a');
+subscribe("space, a", () => {
+  console.log("space or a");
 });
 ```
 
@@ -64,10 +85,10 @@ subscribe('space, a', () => {
 通过 `'+'` 可以监听组合键，也可以自定义组合键分隔符。
 
 ```javascript
-import { subscribe } from 'toukey';
+import { subscribe } from "toukey";
 
-subscribe('ctrl+a', () => {
-  console.log('ctrl+a');
+subscribe("ctrl+a", () => {
+  console.log("ctrl+a");
 });
 ```
 
@@ -76,18 +97,18 @@ subscribe('ctrl+a', () => {
 在调用时可以第三个参数可以指定事件的作用空间。`"default"` 是默认空间。
 
 ```javascript
-import { subscribe, setScope } from 'toukey';
+import { subscribe, setScope } from "toukey";
 
 const defaultHandler = () => {
-  console.log('space in default');
+  console.log("space in default");
 };
 
 const subHandler = () => {
-  console.log('space in sub');
+  console.log("space in sub");
 };
 
-subscribe('space', defaultHandler, 'default');
-subscribe('space', subHandler, { scope: 'sub' });
+subscribe("space", defaultHandler, "default");
+subscribe("space", subHandler, { scope: "sub" });
 ```
 
 #### setScope
@@ -95,9 +116,9 @@ subscribe('space', subHandler, { scope: 'sub' });
 可以通过 `setScope` 接口设置当前有效地空间。
 
 ```javascript
-import { setScope } from 'toukey';
+import { setScope } from "toukey";
 
-setScope('sub');
+setScope("sub");
 ```
 
 #### getScope
@@ -105,7 +126,7 @@ setScope('sub');
 可以通过 `getScope` 接口获取当前有效地空间。
 
 ```javascript
-import { getScope } from 'toukey';
+import { getScope } from "toukey";
 
 console.log(getScope());
 ```
@@ -115,29 +136,29 @@ console.log(getScope());
 可以通过 `deleteScope` 接口删除指定空间。
 
 ```javascript
-import { deleteScope } from 'toukey';
+import { deleteScope } from "toukey";
 
-deleteScope('main');
+deleteScope("main");
 ```
 
-#### 特殊空间 *
+#### 特殊空间 \*
 
 如果指定 `scope` 为 `"*"` 的话，该监听函数会无视 `scope` 的设置。
 
 ```javascript
-import { subscribe, setScope } from 'toukey';
+import { subscribe, setScope } from "toukey";
 
 const handler = () => {
-  console.log('space in default');
+  console.log("space in default");
 };
 
 const subHandler = () => {
-  console.log('space in sub');
+  console.log("space in sub");
 };
 
-subscribe('space', defaultHandler, '*');
-subscribe('space', subHandler, 'sub');
-setScope('sub');
+subscribe("space", defaultHandler, "*");
+subscribe("space", subHandler, "sub");
+setScope("sub");
 ```
 
 ### keydown and keyup
@@ -161,10 +182,10 @@ subscribe('space', upHandler, {'keyup'});
 
 ### clearAll
 
-可以通过  `clearAll()`  清除所有侦听器
+可以通过 `clearAll()` 清除所有侦听器
 
 ```javascript
-import { clearAll } from 'toukey';
+import { clearAll } from "toukey";
 
 clearAll();
 ```
