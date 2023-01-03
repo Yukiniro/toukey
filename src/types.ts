@@ -1,8 +1,10 @@
-interface ToukeyOptions {
+type ToukeyOptions = {
   scope?: string;
   splitValue?: any;
   keydown?: boolean;
   keyup?: boolean;
-}
+};
 
-export { ToukeyOptions };
+type ToukeyHandler = (e: KeyboardEvent) => void;
+
+export { ToukeyOptions, ToukeyHandler };

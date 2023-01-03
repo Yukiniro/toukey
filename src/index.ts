@@ -1,7 +1,7 @@
 import { transModifierKey } from "./keys";
 import { filterBlank, lowerCase } from "./util";
 import { isString, isFunction, isObject, remove } from "bittydash";
-import { ToukeyOptions } from "./types";
+import { ToukeyHandler, ToukeyOptions } from "./types";
 
 const KEY_DOWN = "keydown";
 const KEY_UP = "keyup";
@@ -74,7 +74,7 @@ function _handleEvent(event: KeyboardEvent) {
 }
 
 function _dispatch(
-  handler: (e: KeyboardEvent) => void,
+  handler: ToukeyHandler,
   keydown: boolean,
   keyup: boolean,
   event: KeyboardEvent
@@ -110,7 +110,7 @@ function _updatePressedKeys(event: KeyboardEvent) {
  */
 function subscribe(
   key: string,
-  handler: (e?: KeyboardEvent) => void,
+  handler: ToukeyHandler,
   options?: string | ToukeyOptions
 ): () => void {
   if (!isString(key)) {

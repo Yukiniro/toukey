@@ -12,6 +12,12 @@
 npm i toukey --save
 ```
 
+or
+
+```shell
+pnpm add toukey --save
+```
+
 ## Use
 
 ### Browser
@@ -52,6 +58,25 @@ const unsubscribe = subscribe("scope", () => {
 
 unsubscribe();
 ```
+
+It is easy to use with react.
+
+```javascript
+import { useEffect } from "react";
+import { subscribe } from "toukey";
+
+function App() {
+  useEffect(() => {
+    return subscribe("scope", () => {
+      console.log("scope");
+    });
+  });
+
+  return <div>hello world</div>;
+}
+```
+
+And here is a library named [react-toukey-hook](https://github.com/Yukiniro/react-toukey-hook) which build with toukey for react hook.
 
 ### Multiple Key
 
