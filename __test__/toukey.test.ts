@@ -304,7 +304,7 @@ describe("Valid options", () => {
   });
 });
 
-test.only("Test enable", () =>
+test("Test enable", () =>
   new Promise<void>((resolve, reject) => {
     subscribe("a", (e) => {
       expect(e.key.toLowerCase()).toBe("a");

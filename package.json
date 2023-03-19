@@ -1,6 +1,6 @@
 {
   "name": "toukey",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Toukey is a Javascript library for keyboard shortcuts",
   "main": "dist/toukey.cjs.js",
   "module": "dist/toukey.esm.js",
@@ -44,6 +44,8 @@
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^13.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
     "bittydash": "^0.5.5",
     "c8": "^7.11.0",
     "eslint": "^8.9.0",

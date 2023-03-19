@@ -1,6 +1,6 @@
 type ToukeyOptions = {
   scope?: string;
-  splitValue?: any;
+  splitValue?: string;
   keydown?: boolean;
   keyup?: boolean;
 };
