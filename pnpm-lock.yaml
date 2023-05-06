@@ -9,7 +9,7 @@ specifiers:
   '@rollup/plugin-node-resolve': ^13.2.0
   '@typescript-eslint/eslint-plugin': ^5.55.0
   '@typescript-eslint/parser': ^5.55.0
-  bittydash: ^0.5.5
+  bittydash: ^0.7.0
   c8: ^7.11.0
   eslint: ^8.9.0
   eslint-config-prettier: ^8.4.0
@@ -41,7 +41,7 @@ devDependencies:
   '@rollup/plugin-node-resolve': 13.2.0_rollup@3.19.1
   '@typescript-eslint/eslint-plugin': 5.55.0_dyr3to2dadsrlnz5djjinz27b4
   '@typescript-eslint/parser': 5.55.0_l4rz7ussvdrlh7evejee5now5a
-  bittydash: 0.5.5
+  bittydash: 0.7.1
   c8: 7.11.0
   eslint: 8.9.0
   eslint-config-prettier: 8.4.0_eslint@8.9.0
@@ -2498,8 +2498,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /bittydash/0.5.5:
-    resolution: {integrity: sha512-c2Y6cKFQRrbU2jZPhIdNuoXopSwV/QxL0jUxUAbzEhQuEqRYJNNmbyHxG0LACYQbK0kVPy5zRa/+m0HOlAL5Pg==}
+  /bittydash/0.7.1:
+    resolution: {integrity: sha512-zsrD4PaWzuOc6TIahZaF081DrPTLIwm0s8im2oxU5oqnB2HdKKbMgFJb/AEqfb7sQY7sJC4zwdQSGxxc7shJFQ==}
     dev: true
 
   /boxen/5.1.2:
