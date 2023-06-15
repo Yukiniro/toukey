@@ -54,7 +54,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "happy-dom": "^8.1.0",
+    "happy-dom": "^9.0.0",
     "jest": "^27.5.1",
     "jsdom": "^21.1.1",
     "prettier": "^2.5.1",
