@@ -17,7 +17,7 @@ specifiers:
   eslint-plugin-import: ^2.25.4
   eslint-plugin-node: ^11.1.0
   eslint-plugin-promise: ^6.0.0
-  happy-dom: ^9.0.0
+  happy-dom: ^10.0.0
   jest: ^27.5.1
   jsdom: ^22.0.0
   prettier: ^2.5.1
@@ -49,7 +49,7 @@ devDependencies:
   eslint-plugin-import: 2.25.4_bj5lxjiexa2qqkojzltbctcukm
   eslint-plugin-node: 11.1.0_eslint@8.9.0
   eslint-plugin-promise: 6.0.0_eslint@8.9.0
-  happy-dom: 9.20.3
+  happy-dom: 10.0.3
   jest: 27.5.1
   jsdom: 22.1.0
   prettier: 2.5.1
@@ -62,7 +62,7 @@ devDependencies:
   rollup-plugin-typescript2: 0.35.0_7iejawhbqmte5pthjozf4tfuqy
   tslib: 2.4.0
   typescript: 5.0.2
-  vitest: 0.32.0_dpq6kcpbqj3l6mo2aohhnxqyty
+  vitest: 0.32.0_yftfdqxr32ltxgaxfdvuwthl7q
 
 packages:
 
@@ -4070,8 +4070,8 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /happy-dom/9.20.3:
-    resolution: {integrity: sha512-eBsgauT435fXFvQDNcmm5QbGtYzxEzOaX35Ia+h6yP/wwa4xSWZh1CfP+mGby8Hk6Xu59mTkpyf72rUXHNxY7A==}
+  /happy-dom/10.0.3:
+    resolution: {integrity: sha512-WkCP+Z5fX6U5PY+yHP3ElV5D9PoxRAHRWPFq3pG9rg/6Hjf5ak7dozAgSCywsTRUq2qfa8vV8OQvUy5pRXy8EQ==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -7004,7 +7004,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.32.0_dpq6kcpbqj3l6mo2aohhnxqyty:
+  /vitest/0.32.0_yftfdqxr32ltxgaxfdvuwthl7q:
     resolution: {integrity: sha512-SW83o629gCqnV3BqBnTxhB10DAwzwEx3z+rqYZESehUB+eWsJxwcBQx7CKy0otuGMJTYh7qCVuUX23HkftGl/Q==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -7049,7 +7049,7 @@ packages:
       chai: 4.3.7
       concordance: 5.0.4
       debug: 4.3.4
-      happy-dom: 9.20.3
+      happy-dom: 10.0.3
       jsdom: 22.1.0
       local-pkg: 0.4.3
       magic-string: 0.30.0
