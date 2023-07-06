@@ -20,7 +20,7 @@ specifiers:
   happy-dom: ^10.0.0
   jest: ^27.5.1
   jsdom: ^22.0.0
-  prettier: ^2.5.1
+  prettier: ^3.0.0
   prettier-eslint: ^13.0.0
   rollup: ^3.19.1
   rollup-plugin-filesize: ^10.0.0
@@ -52,7 +52,7 @@ devDependencies:
   happy-dom: 10.0.3
   jest: 27.5.1
   jsdom: 22.1.0
-  prettier: 2.5.1
+  prettier: 3.0.0
   prettier-eslint: 13.0.0
   rollup: 3.19.1
   rollup-plugin-filesize: 10.0.0
@@ -5951,6 +5951,12 @@ packages:
   /prettier/2.5.1:
     resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
+  /prettier/3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
