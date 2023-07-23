@@ -15,7 +15,7 @@
     "test:run": "npx vitest run",
     "test:coverrage": "npx vitest --coverage",
     "clear": "node scripts/clearDist.mjs",
-    "publish": "npm run test:run && npm run clear && npm run build:all && npm publish"
+    "npm:publish": "npm run test:run && npm run clear && npm run build:all && npm publish"
   },
   "keywords": [
     "keyboard",
