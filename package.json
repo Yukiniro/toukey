@@ -54,7 +54,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "happy-dom": "^10.0.0",
+    "happy-dom": "^11.0.0",
     "prettier": "^3.0.0",
     "prettier-eslint": "^13.0.0",
     "rollup": "^3.19.1",
