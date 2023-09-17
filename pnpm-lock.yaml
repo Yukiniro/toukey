@@ -54,8 +54,8 @@ devDependencies:
     specifier: ^6.0.0
     version: 6.0.0(eslint@8.9.0)
   happy-dom:
-    specifier: ^11.0.0
-    version: 11.0.1
+    specifier: ^12.0.0
+    version: 12.0.0
   prettier:
     specifier: ^3.0.0
     version: 3.0.0
@@ -88,7 +88,7 @@ devDependencies:
     version: 5.0.2
   vitest:
     specifier: ^0.34.0
-    version: 0.34.0(happy-dom@11.0.1)
+    version: 0.34.0(happy-dom@12.0.0)
 
 packages:
 
@@ -3477,8 +3477,8 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /happy-dom@11.0.1:
-    resolution: {integrity: sha512-3U3kXpTbHQoCxItf5VhdHSSeX7ZKekcEx6hBZ5Ug12MeEASL89upfz6Nefv7pwTc5jWsXPHlVInjB1gID0HkwQ==}
+  /happy-dom@12.0.0:
+    resolution: {integrity: sha512-F4VAYlTNIWNWR5MXlHRioMlBjThHsJoXKgJOye9q6rUocioRZKTiL0OYHgi3zhnZtComaTKjHwh5hlLD3HpGCA==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -5484,7 +5484,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest@0.34.0(happy-dom@11.0.1):
+  /vitest@0.34.0(happy-dom@12.0.0):
     resolution: {integrity: sha512-8Pnc1fVt1P6uBncdUZ++hgiJGgxIRKuz4bmS/PQziaEcUj0D1g9cGiR1MbLrcsvFTC6fgrqDhYoTAdBG356WMA==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -5528,7 +5528,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.7
       debug: 4.3.4
-      happy-dom: 11.0.1
+      happy-dom: 12.0.0
       local-pkg: 0.4.3
       magic-string: 0.30.1
       pathe: 1.1.1
