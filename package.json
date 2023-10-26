@@ -11,6 +11,7 @@
     "build:all": "npm run build:dev && npm run build:prod",
     "prettier": "npx prettier * --write",
     "lint": "npx eslint src/* --fix",
+    "zhlint": "npx zhlint README-zh.md",
     "test": "npx vitest",
     "test:run": "npx vitest run",
     "test:coverrage": "npx vitest --coverage",
@@ -69,6 +70,7 @@
     "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.4.0",
     "typescript": "^5.0.2",
-    "vitest": "^0.34.0"
+    "vitest": "^0.34.0",
+    "zhlint": "^0.7.1"
   }
 }
