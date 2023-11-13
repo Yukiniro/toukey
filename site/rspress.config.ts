@@ -6,6 +6,7 @@ export default defineConfig({
   title: 'Toukey',
   description: 'Toukey is a Javascript library for keyboard shortcuts',
   icon: "/rspress-icon.png",
+  lang: "en-US",
   logo: {
     light: "/rspress-light-logo.png",
     dark: "/rspress-dark-logo.png",
@@ -14,5 +15,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', mode: 'link', content: 'https://github.com/web-infra-dev/rspress' },
     ],
+    enableContentAnimation: true,
+
   },
 });

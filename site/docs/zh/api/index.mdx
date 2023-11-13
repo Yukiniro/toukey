@@ -1,0 +1,104 @@
+# API
+
+## subscribe
+
+订阅键盘事件。
+
+- 参数
+  - `key` **string** 需要订阅的键值。
+  - `handler` **function** 当键被按下时调用的回调函数。
+  - `options` **string | object** 键盘事件的选项。如果它是一个字符串，它将被转换为一个对象，并且 scope 属性将被设置为字符串的值。如果它是一个对象，scope 属性将被设置为 scope 属性的值。
+    - `options.scope` **string** 键盘事件的范围。如果没有设置，缺省值是 `default`。
+    - `options.splitValue` **boolean** 是否分割键盘事件的值。如果没有设置，缺省值是 `false。`
+    - `options.keydown` **boolean** 是否订阅keydown事件。如果没有设置，缺省值是 `true。`
+    - `options.keyup` **boolean** 是否订阅keyup事件。如果没有设置，缺省值是 `false。`
+
+:::info
+`subscribe` 接口返回一个函数，可以调用该函数来取消当前的事件监听器。
+:::
+
+```javascript
+import { subscribe } from "toukey";
+
+const unsubscribe = subscribe("scope", () => {
+  console.log("scope");
+});
+
+unsubscribe();
+```
+
+## getScope
+
+获取当前键盘事件的范围。
+
+```javascript
+import { getScope } from "toukey";
+
+const scope = getScope();
+```
+
+## setScope
+
+设置当前键盘事件的范围。
+
+- 参数
+  - `scope` **string** 键盘事件的范围。
+
+```javascript
+import { setScope } from "toukey";
+
+setScope("scope");
+```
+
+## deleteScope
+
+删除指定键盘事件的范围。
+
+- Params
+  - `scope` **string** 键盘事件的范围。
+
+```javascript
+import { deleteScope } from "toukey";
+
+deleteScope("scope");
+```
+
+## enable
+
+启用键盘事件。
+
+```javascript
+import { enable } from "toukey";
+
+enable();
+```
+
+## disable
+
+禁用键盘事件。
+
+```javascript
+import { disable } from "toukey";
+
+disable();
+```
+
+## isEnable
+
+获取键盘事件的状态。
+
+```javascript
+import { isEnable } from "toukey";
+
+const status = isEnable();
+```
+
+## clearAll
+
+清除所有键盘事件。
+
+```javascript
+import { clearAll } from "toukey";
+
+clearAll();
+```

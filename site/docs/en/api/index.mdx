@@ -1,0 +1,104 @@
+# API
+
+## subscribe
+
+Subscribe the key's keyboard event.
+
+- Params
+  - `key` **string** The key to subscribe to.
+  - `handler` **function** The callback function to be called when the key is pressed.
+  - `options` **string | object** The options of the key event. If it is a string, it will be converted to an object, and the `scope` property will be set to the string value. If it is an object, the `scope` property will be set to the value of the `scope` property.
+    - `options.scope` **string** The scope of the key event. If the scope is not set, the default is `default`.
+    - `options.splitValue` **boolean** Whether to split the value of the key event. If it is not set, the default is `false`.
+    - `options.keydown` **boolean** Whether to subscribe to the keydown event. If it is not set, the default is `true`.
+    - `options.keyup` **boolean** Whether to subscribe to the keyup event. If it is not set, the default is `false`.
+
+:::info
+The `subscribe` interface returns a function that can be called to cancel the current event listener.
+:::
+
+```javascript
+import { subscribe } from "toukey";
+
+const unsubscribe = subscribe("scope", () => {
+  console.log("scope");
+});
+
+unsubscribe();
+```
+
+## getScope
+
+Get the scope of the current keyboard event.
+
+```javascript
+import { getScope } from "toukey";
+
+const scope = getScope();
+```
+
+## setScope
+
+Set the scope of the current keyboard event.
+
+- Params
+  - `scope` **string** The scope of the key event.
+
+```javascript
+import { setScope } from "toukey";
+
+setScope("scope");
+```
+
+## deleteScope
+
+Delete the scope of the current keyboard event.
+
+- Params
+  - `scope` **string** The scope of the key event.
+
+```javascript
+import { deleteScope } from "toukey";
+
+deleteScope("scope");
+```
+
+## enable
+
+Enable the key event.
+
+```javascript
+import { enable } from "toukey";
+
+enable();
+```
+
+## disable
+
+Disable the key event.
+
+```javascript
+import { disable } from "toukey";
+
+disable();
+```
+
+## isEnable
+
+Get the status of the key event.
+
+```javascript
+import { isEnable } from "toukey";
+
+const status = isEnable();
+```
+
+## clearAll
+
+Clear all key events.
+
+```javascript
+import { clearAll } from "toukey";
+
+clearAll();
+```

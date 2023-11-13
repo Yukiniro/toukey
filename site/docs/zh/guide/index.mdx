@@ -1,0 +1,134 @@
+import { PackageManagerTabs } from "@theme";
+
+# 介绍
+
+`Toukey` 是一个简单高效的键盘事件库。这是 [toukey](https://toukey.vercel.app/) 的文档站点。
+
+## 安装
+
+<PackageManagerTabs command="install toukey -S" />
+
+## 使用
+
+### 浏览器
+
+你可以在 HTML 中下载并引入 **toukey.js**，也可以通过 [UNPKG](https://unpkg.com/browse/toukey/dist/) | [jsDelivr](https://www.jsdelivr.com/package/npm/toukey) 下载。
+
+```javascript
+<script src="https://unpkg.com/toukey/dist/toukey.umd.min.js"></script>
+<script>
+  toukey.subscribe('space', function() {
+    console.log('space');
+  });
+</script>
+```
+
+### React
+
+在 react 中使用也很简单。
+
+```javascript
+import { useEffect } from "react";
+import { subscribe } from "toukey";
+
+function App() {
+  useEffect(() => {
+    return subscribe("scope", () => {
+      console.log("scope");
+    });
+  });
+
+  return <div>hello world</div>;
+}
+```
+
+这里还有一个基于 toukey 开发的 react hook 库 [react-toukey-hook](https://github.com/Yukiniro/react-toukey-hook)。
+
+### 基本用法
+
+你需要在你的系统中安装 `Node.js`。
+
+```javascript
+import { subscribe } from "toukey";
+
+subscribe("scope", () => {
+  console.log("scope");
+});
+```
+
+### 取消订阅
+
+`subscribe` 接口返回一个函数，可以调用该函数来取消当前事件监听。
+
+```javascript
+import { subscribe } from "toukey";
+
+const unsubscribe = subscribe("scope", () => {
+  console.log("scope");
+});
+
+unsubscribe();
+```
+
+### 多个事件监听
+
+多个事件监听可以通过 `toukey` 一次性创建。
+
+```javascript
+import { subscribe } from "toukey";
+
+subscribe("scope, a", () => {
+  console.log("scope or a");
+});
+```
+
+### 连接符
+
+你可以使用 `'+'` 来监听键盘组合，也可以自定义键盘组合连接符。
+
+```javascript
+import { subscribe } from "toukey";
+
+subscribe("ctrl+a", () => {
+  console.log("ctrl+a");
+});
+```
+
+### 作用域
+
+进行事件监听时，第三个参数可以指定事件的作用域。`"default"` 是默认作用域。
+
+```javascript
+import { subscribe, setScope } from "toukey";
+
+const defaultHandler = () => {
+  console.log("scope in default");
+};
+
+const subHandler = () => {
+  console.log("scope in sub");
+};
+
+subscribe("scope", defaultHandler, "default");
+subscribe("scope", subHandler, { scope: "sub" });
+```
+
+#### 特殊作用域 `"*"`
+
+如果作用域设置为 `"*"`，监听函数将忽略作用域设置。
+
+```javascript
+import { subscribe, setScope } from "toukey";
+
+const handler = () => {
+  console.log("scope in default");
+};
+
+const subHandler = () => {
+  console.log("scope in sub");
+};
+
+subscribe("scope", defaultHandler, "*");
+subscribe("scope", subHandler, "sub");
+setScope("sub");
+```
