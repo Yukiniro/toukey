@@ -5,11 +5,11 @@ export default defineConfig({
   root: path.join(__dirname, "docs"),
   title: "Toukey",
   description: "Toukey is a Javascript library for keyboard shortcuts",
-  icon: "/rspress-icon.png",
+  icon: "/toukey-icon.png",
   lang: "en",
   logo: {
-    light: "/rspress-light-logo.png",
-    dark: "/rspress-dark-logo.png"
+    light: "/toukey-logo.png",
+    dark: "/toukey-logo.png"
   },
   locales: [
     {
@@ -30,7 +30,7 @@ export default defineConfig({
       {
         icon: "github",
         mode: "link",
-        content: "https://github.com/web-infra-dev/rspress"
+        content: "https://github.com/Yukiniro/toukey"
       }
     ],
     enableContentAnimation: true

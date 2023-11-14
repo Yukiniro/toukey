@@ -12,11 +12,11 @@ hero:
       text: Github
       link: https://github.com/Yukiniro/toukey
   image:
-    src: /rspress-icon.png
+    src: /toukey-logo.png
     alt: Toukey Logo
 features:
   - title: Easy to Use
-    details: Turkey is built out of pure javascript. It is simple to use by the subscription API that could return a feature to unsubscribe the event.
+    details: Turkey is simple to use by the subscription API that could return a feature to unsubscribe the event.
     icon: 🏃🏻‍♀️
   - title: Tiny and No-dependence
     details: Toukey has no dependencies and is tiny (minimum size is 2.81 KB)(Gzipped Size is 1.27 KB).

@@ -12,7 +12,7 @@ hero:
       text: Github
       link: https://github.com/Yukiniro/toukey
   image:
-    src: /rspress-icon.png
+    src: /toukey-logo.png
     alt: Toukey Logo
 features:
   - title: 简单易用
