@@ -7,21 +7,12 @@ export default {
   input: "src/index.ts",
   output: [
     {
-      file: "./dist/toukey.cjs.js",
+      file: "./dist/toukey.cjs",
       format: "cjs"
     },
     {
-      file: "./dist/toukey.js",
+      file: "./dist/toukey.mjs",
       format: "esm"
-    },
-    {
-      file: "./dist/toukey.esm.js",
-      format: "esm"
-    },
-    {
-      file: "./dist/toukey.umd.js",
-      format: "umd",
-      name: "toukey"
     }
   ],
   plugins: [
