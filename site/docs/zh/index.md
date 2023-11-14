@@ -6,7 +6,7 @@ hero:
   text: Toukey 是一个用于处理键盘快捷键的 Javascript 库
   actions:
     - theme: brand
-      text: Quick Start
+      text: 快速开始
       link: /guide/
     - theme: alt
       text: Github
