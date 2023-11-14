@@ -325,3 +325,32 @@ test("Test enable", () =>
       triggerKey("b");
     }, 100);
   }));
+
+describe("Test once", () => {
+  test("valid once", () =>
+    new Promise<void>((resolve, reject) => {
+      let count = 0;
+      subscribe("a", () => count++, { once: true });
+      triggerKey("a");
+      triggerKey("a");
+      setTimeout(
+        () =>
+          count === 1 ? resolve() : reject(new Error(`count is ${count}`)),
+        300
+      );
+    }));
+
+  test.only("invalid once", () =>
+    new Promise<void>((resolve, reject) => {
+      let count = 0;
+      subscribe("b", () => count++);
+      triggerKey("b");
+      triggerKey("b", { keyup: true });
+      setTimeout(() => triggerKey("b"));
+      setTimeout(
+        () =>
+          count === 2 ? resolve() : reject(new Error(`count is ${count}`)),
+        300
+      );
+    }));
+});

@@ -3,8 +3,18 @@ type ToukeyOptions = {
   splitValue?: string;
   keydown?: boolean;
   keyup?: boolean;
+  once?: boolean;
 };
 
 type ToukeyHandler = (e: KeyboardEvent) => void;
 
-export { ToukeyOptions, ToukeyHandler };
+type ToukeyItem = {
+  handler: ToukeyHandler;
+  key: string;
+  splitValue: string;
+  keydown: boolean;
+  keyup: boolean;
+  once: boolean;
+};
+
+export { ToukeyOptions, ToukeyHandler, ToukeyItem };
