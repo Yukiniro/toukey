@@ -1,7 +1,7 @@
 import { transModifierKey } from "./keys";
 import { filterBlank, lowerCase } from "./util";
 import { isString, isFunction, isObject, remove } from "bittydash";
-import { ToukeyHandler, ToukeyOptions } from "./types";
+import { ToukeyHandler, ToukeyItem, ToukeyOptions } from "./types";
 
 const KEY_DOWN = "keydown";
 const KEY_UP = "keyup";
@@ -43,6 +43,15 @@ function _isKeyMatch(key: string | string[]): boolean {
   }
 }
 
+function _isKeyEventMatch(
+  event: KeyboardEvent,
+  keydown: boolean,
+  keyup: boolean
+): boolean {
+  const { type } = event;
+  return (type === "keydown" && keydown) || (type === "keyup" && keyup);
+}
+
 function _clearPressedKeys(): void {
   _pressedKeys.length = 0;
 }
@@ -56,33 +65,26 @@ function _handleEvent(event: KeyboardEvent) {
 
   const listForAll = _handlerMap.get("*") || [];
   const listForScope = _handlerMap.get(_curScope) || [];
+
   [...listForAll, ...listForScope].forEach((item) => {
-    const { handler, keydown, keyup, key, splitValue } = item;
+    const { handler, keydown, keyup, key, splitValue, once } = item;
+    const triggerIfMatch = (matchKey: string | string[]) => {
+      if (_isKeyMatch(matchKey) && _isKeyEventMatch(event, keydown, keyup)) {
+        handler.call(this, event);
+        once && queueMicrotask(() => unsubscribe(item, _curScope));
+      }
+    };
 
     const chunks = _splitKeys(key);
     chunks.forEach((chunk) => {
       if (_isComposeKey(chunk, splitValue)) {
         const composes = _composeKeys(chunk, splitValue);
-        if (_isKeyMatch(composes)) {
-          _dispatch(handler, keydown, keyup, event);
-        }
-      } else if (_isKeyMatch(chunk)) {
-        _dispatch(handler, keydown, keyup, event);
+        triggerIfMatch(composes);
+      } else {
+        triggerIfMatch(chunk);
       }
     });
   });
-}
-
-function _dispatch(
-  handler: ToukeyHandler,
-  keydown: boolean,
-  keyup: boolean,
-  event: KeyboardEvent
-): void {
-  const { type } = event;
-  if ((type === "keydown" && keydown) || (type === "keyup" && keyup)) {
-    handler.call(this, event);
-  }
 }
 
 function _updatePressedKeys(event: KeyboardEvent) {
@@ -106,6 +108,7 @@ function _updatePressedKeys(event: KeyboardEvent) {
  * @param {string} options.splitValue
  * @param {boolean} options.keydown
  * @param {boolean} options.keyup
+ * @param {boolean} options.once
  * @returns {function} - Unsubscribe key's keyboard event.
  */
 function subscribe(
@@ -122,13 +125,14 @@ function subscribe(
   }
 
   const _key = key;
-  let _scope: string | ToukeyOptions = "default";
+  let _scope = "default";
   let _splitValue = "+";
-  let _shouldHandleInKeydown = false;
+  let _shouldHandleInKeydown = true;
   let _shouldHandleInKeyup = false;
+  let _once = false;
 
   if (isString(options)) {
-    _scope = options;
+    _scope = options as string;
   } else if (isObject(options)) {
     Object.keys(options).forEach((key) => {
       if (key === "scope") {
@@ -142,6 +146,9 @@ function subscribe(
       }
       if (key === KEY_UP) {
         _shouldHandleInKeyup = true;
+      }
+      if (key === "once") {
+        _once = true;
       }
     });
   }
@@ -163,22 +170,25 @@ function subscribe(
   }
 
   const _list = _handlerMap.get(_scope);
-  const _item = {
+  const _item: ToukeyItem = {
     handler,
     key: _key,
     splitValue: _splitValue,
     keydown: _shouldHandleInKeydown,
-    keyup: _shouldHandleInKeyup
+    keyup: _shouldHandleInKeyup,
+    once: _once
   };
 
   _list.push(_item);
 
   return () => {
-    const _list = _handlerMap.get(_scope);
-    if (_list) {
-      remove(_list, _item);
-    }
+    unsubscribe(_item, _scope);
   };
+}
+
+function unsubscribe(item: ToukeyItem, scope: string) {
+  const _list = _handlerMap.get(scope);
+  _list && remove(_list, item);
 }
 
 /**
