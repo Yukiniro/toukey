@@ -1,22 +1,10 @@
-import {
-  clearAll,
-  deleteScope,
-  getScope,
-  setScope,
-  subscribe,
-  disable,
-  enable,
-  isEnabled
-} from "../src";
+import { clearAll, deleteScope, getScope, setScope, subscribe, disable, enable, isEnabled } from "../src";
 import { describe, test, afterEach, expect } from "vitest";
 import { KeyboardEvent } from "happy-dom";
 
 type TriggerEventOptions = { keydown?: boolean; keyup?: boolean };
 
-function triggerKey(
-  key: string,
-  options: TriggerEventOptions = { keydown: true, keyup: false }
-) {
+function triggerKey(key: string, options: TriggerEventOptions = { keydown: true, keyup: false }) {
   if (options.keydown) {
     const event: KeyboardEvent = new KeyboardEvent("keydown", { key });
     document.dispatchEvent(event as unknown as Event);
@@ -333,11 +321,7 @@ describe("Test once", () => {
       subscribe("a", () => count++, { once: true });
       triggerKey("a");
       triggerKey("a");
-      setTimeout(
-        () =>
-          count === 1 ? resolve() : reject(new Error(`count is ${count}`)),
-        300
-      );
+      setTimeout(() => (count === 1 ? resolve() : reject(new Error(`count is ${count}`))), 300);
     }));
 
   test.only("invalid once", () =>
@@ -347,10 +331,6 @@ describe("Test once", () => {
       triggerKey("b");
       triggerKey("b", { keyup: true });
       setTimeout(() => triggerKey("b"));
-      setTimeout(
-        () =>
-          count === 2 ? resolve() : reject(new Error(`count is ${count}`)),
-        300
-      );
+      setTimeout(() => (count === 2 ? resolve() : reject(new Error(`count is ${count}`))), 300);
     }));
 });

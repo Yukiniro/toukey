@@ -9,7 +9,7 @@
     "build:dev": "npx rollup -c rollup.config.dev.mjs",
     "build:prod": "npx rollup -c rollup.config.prod.mjs",
     "build:all": "npm run build:dev && npm run build:prod",
-    "prettier": "npx prettier * --write",
+    "prettier": "npx prettier src/**/*.ts playground/src/**/*.jsx  --write",
     "lint": "npx eslint src/* --fix",
     "zhlint": "npx zhlint README-zh.md",
     "test": "npx vitest",

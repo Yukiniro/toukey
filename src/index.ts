@@ -1,7 +1,7 @@
 import { transModifierKey } from "./keys";
 import { filterBlank, lowerCase } from "./util";
 import { isString, isFunction, isObject, remove } from "bittydash";
-import { ToukeyHandler, ToukeyItem, ToukeyOptions } from "./types";
+import { ToukeyHandler, ToukeyItem, ToukeyOffOptions, ToukeyOptions } from "./types";
 
 const KEY_DOWN = "keydown";
 const KEY_UP = "keyup";
@@ -36,18 +36,11 @@ function _isKeyMatch(key: string | string[]): boolean {
       ) === lowerCase(_pressedKeys.join(""))
     );
   } else {
-    return (
-      _pressedKeys.length === 1 &&
-      lowerCase(_pressedKeys[0]) === lowerCase(transModifierKey(key))
-    );
+    return _pressedKeys.length === 1 && lowerCase(_pressedKeys[0]) === lowerCase(transModifierKey(key));
   }
 }
 
-function _isKeyEventMatch(
-  event: KeyboardEvent,
-  keydown: boolean,
-  keyup: boolean
-): boolean {
+function _isKeyEventMatch(event: KeyboardEvent, keydown: boolean, keyup: boolean): boolean {
   const { type } = event;
   return (type === "keydown" && keydown) || (type === "keyup" && keyup);
 }
@@ -111,11 +104,7 @@ function _updatePressedKeys(event: KeyboardEvent) {
  * @param {boolean} options.once
  * @returns {function} - Unsubscribe key's keyboard event.
  */
-function subscribe(
-  key: string,
-  handler: ToukeyHandler,
-  options?: string | ToukeyOptions
-): () => void {
+function subscribe(key: string, handler: ToukeyHandler, options?: string | ToukeyOptions): () => void {
   if (!isString(key)) {
     throw new Error("key must be string");
   }
@@ -252,13 +241,25 @@ function isEnabled(): boolean {
   return _isEnabled;
 }
 
-export {
-  clearAll,
-  subscribe,
-  getScope,
-  setScope,
-  deleteScope,
-  enable,
-  disable,
-  isEnabled
-};
+function on(key: string, handler: ToukeyHandler, options?: ToukeyOptions) {
+  subscribe(key, handler, options);
+}
+
+function off(key: string, handler: ToukeyHandler, options: ToukeyOffOptions = {}) {
+  const { scope = "default", keydown = false, keyup = false, splitValue = "+" } = options;
+  const listForAll = _handlerMap.get("*") || [];
+  const listForScope = _handlerMap.get(scope) || [];
+  const removeList = [...listForAll, ...listForScope].filter(
+    (item) =>
+      item.handler === handler &&
+      item.key === key &&
+      item.keydown === keydown &&
+      item.keyup === keyup &&
+      item.splitValue === splitValue
+  );
+  removeList.forEach((item) => {
+    unsubscribe(item, scope);
+  });
+}
+
+export { on, off, clearAll, subscribe, getScope, setScope, deleteScope, enable, disable, isEnabled };
