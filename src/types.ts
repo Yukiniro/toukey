@@ -6,6 +6,13 @@ type ToukeyOptions = {
   once?: boolean;
 };
 
+type ToukeyOffOptions = {
+  scope?: string;
+  splitValue?: string;
+  keydown?: boolean;
+  keyup?: boolean;
+};
+
 type ToukeyHandler = (e: KeyboardEvent) => void;
 
 type ToukeyItem = {
@@ -17,4 +24,4 @@ type ToukeyItem = {
   once: boolean;
 };
 
-export { ToukeyOptions, ToukeyHandler, ToukeyItem };
+export { ToukeyOptions, ToukeyHandler, ToukeyItem, ToukeyOffOptions };
