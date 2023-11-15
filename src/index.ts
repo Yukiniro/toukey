@@ -1,6 +1,6 @@
 import { transModifierKey } from "./keys";
 import { filterBlank, lowerCase } from "./util";
-import { isString, isFunction, isObject, remove } from "bittydash";
+import { isString, isFunction, isObject, remove, isUndefined } from "bittydash";
 import { ToukeyHandler, ToukeyItem, ToukeyOffOptions, ToukeyOptions } from "./types";
 
 const KEY_DOWN = "keydown";
@@ -241,12 +241,36 @@ function isEnabled(): boolean {
   return _isEnabled;
 }
 
+/**
+ * @desc Subscribe the key's keyboard event.
+ *
+ * @param key
+ * @param handler
+ * @param options
+ */
 function on(key: string, handler: ToukeyHandler, options?: ToukeyOptions) {
   subscribe(key, handler, options);
 }
 
-function off(key: string, handler: ToukeyHandler, options: ToukeyOffOptions = {}) {
-  const { scope = "default", keydown = false, keyup = false, splitValue = "+" } = options;
+/**
+ * @desc Unsubscribe the key's keyboard event.
+ *
+ * @param key
+ * @param handler
+ * @param options
+ */
+function off(key: string, handler?: ToukeyHandler, options?: ToukeyOffOptions) {
+  if (isUndefined(handler) && isUndefined(options)) {
+    _handlerMap.forEach((list, mapKey) => {
+      _handlerMap.set(
+        mapKey,
+        list.filter((item: ToukeyItem) => item.key !== key)
+      );
+    });
+    return;
+  }
+
+  const { scope = "default", keydown = true, keyup = false, splitValue = "+" } = options || {};
   const listForAll = _handlerMap.get("*") || [];
   const listForScope = _handlerMap.get(scope) || [];
   const removeList = [...listForAll, ...listForScope].filter(
