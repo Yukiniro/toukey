@@ -1,6 +1,7 @@
 import { clearAll, deleteScope, getScope, setScope, subscribe, disable, enable, isEnabled } from "../src";
 import { describe, test, afterEach, expect } from "vitest";
 import { KeyboardEvent } from "happy-dom";
+import * as Toukey from "../src";
 
 type TriggerEventOptions = { keydown?: boolean; keyup?: boolean };
 
@@ -324,7 +325,7 @@ describe("Test once", () => {
       setTimeout(() => (count === 1 ? resolve() : reject(new Error(`count is ${count}`))), 300);
     }));
 
-  test.only("invalid once", () =>
+  test("invalid once", () =>
     new Promise<void>((resolve, reject) => {
       let count = 0;
       subscribe("b", () => count++);
@@ -333,4 +334,59 @@ describe("Test once", () => {
       setTimeout(() => triggerKey("b"));
       setTimeout(() => (count === 2 ? resolve() : reject(new Error(`count is ${count}`))), 300);
     }));
+});
+
+describe.only("Test on and off", () => {
+  test("on", () => {
+    return (async () => {
+      await new Promise((resolve) => {
+        Toukey.on("a", resolve);
+        triggerKey("a");
+      });
+    })();
+  });
+
+  test("off", () => {
+    return (async () => {
+      let count = 0;
+      const handler = () => count++;
+      Toukey.on("a", handler);
+      Toukey.off("a", handler);
+      triggerKey("a");
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (count === 0) {
+            resolve(undefined);
+          } else {
+            reject(new Error("count is not 0"));
+          }
+        }, 100);
+      });
+    })();
+  });
+
+  test("off all", () => {
+    return (async () => {
+      let count = 0;
+      const handler = () => count++;
+      Toukey.on("a", handler, { scope: "main" });
+      Toukey.on("a", handler, { scope: "sub" });
+      Toukey.off("a");
+
+      Toukey.setScope("main");
+      triggerKey("a");
+      Toukey.setScope("sub");
+      triggerKey("a");
+
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (count === 0) {
+            resolve(undefined);
+          } else {
+            reject(new Error("count is not 0"));
+          }
+        }, 100);
+      });
+    })();
+  });
 });
