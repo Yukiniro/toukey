@@ -16,7 +16,9 @@ export default {
     }
   ],
   plugins: [
-    typescript(),
+    typescript({
+      exclude: ["site/**"]
+    }),
     resolve(),
     commonjs(),
     babel({
