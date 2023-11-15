@@ -19,7 +19,7 @@ features:
     details: Turkey is simple to use by the subscription API that could return a feature to unsubscribe the event.
     icon: 🏃🏻‍♀️
   - title: Tiny and No-dependence
-    details: Toukey has no dependencies and is tiny (minimum size is 2.81 KB)(Gzipped Size is 1.27 KB).
+    details: Toukey has no dependencies and is tiny (minimum size is 2.75 KB)(Gzipped Size is 1.22 KB).
     icon: 📦
   - title: Browser & Npm Support
     details: You could download and link toukey.js in your HTML. And also use it by the npm in your project.

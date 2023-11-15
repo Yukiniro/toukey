@@ -15,10 +15,17 @@ export default {
     {
       file: "./dist/toukey.min.mjs",
       format: "esm"
+    },
+    {
+      file: "./dist/toukey.umd.min.js",
+      format: "umd",
+      name: "toukey"
     }
   ],
   plugins: [
-    typescript(),
+    typescript({
+      exclude: ["site/**"]
+    }),
     resolve(),
     commonjs(),
     babel({
