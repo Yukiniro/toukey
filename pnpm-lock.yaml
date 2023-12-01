@@ -75,8 +75,8 @@ devDependencies:
     specifier: ^2.0.5
     version: 2.0.5
   rollup-plugin-serve:
-    specifier: ^1.1.0
-    version: 1.1.0
+    specifier: ^3.0.0
+    version: 3.0.0
   rollup-plugin-typescript2:
     specifier: ^0.36.0
     version: 0.36.0(rollup@4.1.4)(typescript@5.2.2)
@@ -4698,9 +4698,9 @@ packages:
       brorand: 1.1.0
     dev: true
 
-  /mime@3.0.0:
-    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
-    engines: {node: '>=10.0.0'}
+  /mime@4.0.0:
+    resolution: {integrity: sha512-pzhgdeqU5pJ9t5WK9m4RT4GgGWqYJylxUf62Yb9datXRwdcw5MjiD1BYI5evF8AgTXN9gtKX3CFLvCUL5fAhEA==}
+    engines: {node: '>=16'}
     hasBin: true
     dev: true
 
@@ -5601,10 +5601,10 @@ packages:
       - utf-8-validate
     dev: true
 
-  /rollup-plugin-serve@1.1.0:
-    resolution: {integrity: sha512-pYkSsuA0/psKqhhictkJw1c2klya5b+LlCvipWqI9OE1aG2M97mRumZCbBlry5CMEOzYBBgSDgd1694sNbmyIw==}
+  /rollup-plugin-serve@3.0.0:
+    resolution: {integrity: sha512-DjVRhbwC0OgP1Q1sj8Lvx12ee60UTZM767kkjT61sYKHw/wLpANAw3VZN5ZMa5NlvO8bYpfTaqiUrW+icAjXFg==}
     dependencies:
-      mime: 3.0.0
+      mime: 4.0.0
       opener: 1.5.2
     dev: true
 
