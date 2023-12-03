@@ -6,7 +6,13 @@ import { PackageManagerTabs } from "@theme";
 
 ## Installation
 
-<PackageManagerTabs command="install toukey -S" />
+<PackageManagerTabs
+  command={{
+    npm: "npm install toukey -S",
+    yarn: "yarn add toukey -S",
+    pnpm: "pnpm add toukey -S"
+  }}
+/>
 
 ## Useage
 
@@ -113,7 +119,7 @@ subscribe("scope", defaultHandler, "default");
 subscribe("scope", subHandler, { scope: "sub" });
 ```
 
-#### Special Scope *
+#### Special Scope \*
 
 If `scope` is specified as `"*"`, the listener function will ignore the `scope` setting.
 
