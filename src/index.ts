@@ -1,6 +1,5 @@
 import { transModifierKey } from "./keys";
-import { filterBlank, lowerCase } from "./util";
-import { isString, isFunction, isObject, remove, isUndefined } from "bittydash";
+import { filterBlank, lowerCase, isString, isFunction, isObject, remove, isUndefined } from "./util";
 import { ToukeyHandler, ToukeyItem, ToukeyOffOptions, ToukeyOptions } from "./types";
 
 const KEY_DOWN = "keydown";
