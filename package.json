@@ -9,13 +9,12 @@
   "scripts": {
     "build": "unbuild",
     "prettier": "npx prettier src/**/*.ts playground/src/**/*.jsx  --write",
-    "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
-    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+    "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src __test__",
+    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src __test__ -w",
     "prepack": "pnpm run build",
     "zhlint": "npx zhlint README-zh.md",
-    "test": "npx vitest",
-    "test:run": "npx vitest run",
-    "test:coverrage": "npx vitest --coverage",
+    "test": "pnpm lint && pnpm test:types && vitest run --coverage",
+    "test:types": "tsc --noEmit --skipLibCheck",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags"
   },
   "keywords": [
@@ -59,7 +58,7 @@
     "jiti": "^1.21.0",
     "happy-dom": "^12.10.1",
     "prettier": "^3.1.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.2",
     "unbuild": "^2.0.0",
     "vitest": "^1.0.0",
     "zhlint": "^0.7.1"

@@ -3,4 +3,7 @@ demo
 __test__
 .babelrc
 .zhlintrc
-website
+site
+node_modules
+coverage
+assets
