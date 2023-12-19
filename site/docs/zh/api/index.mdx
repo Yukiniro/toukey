@@ -1,6 +1,10 @@
 # API
 
+import { SourceCode } from 'rspress/theme'
+
 ## subscribe
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L107' />
 
 订阅键盘事件。
 
@@ -30,6 +34,8 @@ unsubscribe();
 
 ## on
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L251' />
+
 `on` 是 `subscribe` 的别名。
 
 :::info
@@ -37,6 +43,8 @@ unsubscribe();
 :::
 
 ## off
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L262' />
 
 `off` 可以取消事件监听器。
 
@@ -55,6 +63,8 @@ unsubscribe();
 
 ## getScope
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L187' />
+
 获取当前键盘事件的范围。
 
 ```javascript
@@ -64,6 +74,8 @@ const scope = getScope();
 ```
 
 ## setScope
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L195' />
 
 设置当前键盘事件的范围。
 
@@ -78,6 +90,8 @@ setScope("scope");
 
 ## deleteScope
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L206' />
+
 删除指定键盘事件的范围。
 
 - Params
@@ -91,6 +105,8 @@ deleteScope("scope");
 
 ## enable
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L226' />
+
 启用键盘事件。
 
 ```javascript
@@ -100,6 +116,8 @@ enable();
 ```
 
 ## disable
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L233' />
 
 禁用键盘事件。
 
@@ -111,6 +129,8 @@ disable();
 
 ## isEnable
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L240' />
+
 获取键盘事件的状态。
 
 ```javascript
@@ -120,6 +140,8 @@ const status = isEnable();
 ```
 
 ## clearAll
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L216' />
 
 清除所有键盘事件。
 

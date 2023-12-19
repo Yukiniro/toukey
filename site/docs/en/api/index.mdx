@@ -1,6 +1,10 @@
 # API
 
+import { SourceCode } from 'rspress/theme'
+
 ## subscribe
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L107' />
 
 Subscribe the key's keyboard event.
 
@@ -30,6 +34,8 @@ unsubscribe();
 
 ## on
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L251' />
+
 `on` is an alias for `subscribe`.
 
 :::info
@@ -37,6 +43,8 @@ Why is there an alias? Because `on` and `off` is more in line with the semantics
 :::
 
 ## off
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L262' />
 
 `off` could cancel the event listener.
 
@@ -55,6 +63,8 @@ If the `handler` and `options` is not set, all event listeners of the key will b
 
 ## getScope
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L187' />
+
 Get the scope of the current keyboard event.
 
 ```javascript
@@ -64,6 +74,8 @@ const scope = getScope();
 ```
 
 ## setScope
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L195' />
 
 Set the scope of the current keyboard event.
 
@@ -78,6 +90,8 @@ setScope("scope");
 
 ## deleteScope
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L206' />
+
 Delete the scope of the current keyboard event.
 
 - Params
@@ -91,6 +105,8 @@ deleteScope("scope");
 
 ## enable
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L226' />
+
 Enable the key event.
 
 ```javascript
@@ -100,6 +116,8 @@ enable();
 ```
 
 ## disable
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L233' />
 
 Disable the key event.
 
@@ -111,6 +129,8 @@ disable();
 
 ## isEnable
 
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L240' />
+
 Get the status of the key event.
 
 ```javascript
@@ -120,6 +140,8 @@ const status = isEnable();
 ```
 
 ## clearAll
+
+<SourceCode href='https://github.com/Yukiniro/toukey/blob/master/src/index.ts#L216' />
 
 Clear all key events.
 
