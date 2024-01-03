@@ -52,7 +52,7 @@
     "@types/node": "^20.10.3",
     "@vitest/coverage-v8": "^1.0.1",
     "changelogen": "^0.5.5",
-    "c8": "^8.0.1",
+    "c8": "^9.0.0",
     "eslint": "^8.52.0",
     "eslint-config-unjs": "^0.2.1",
     "jiti": "^1.21.0",
