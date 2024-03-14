@@ -4,7 +4,7 @@ import { defineConfig } from "rspress/config";
 export default defineConfig({
   root: path.join(__dirname, "docs"),
   title: "Toukey",
-  description: "Toukey is a Javascript library for keyboard shortcuts",
+  description: "Toukey is a simple and efficient keyboard events library.",
   icon: "/toukey-icon.png",
   lang: "en",
   logo: {
@@ -16,7 +16,7 @@ export default defineConfig({
       lang: "en",
       label: "English",
       title: "Toukey.js",
-      description: "Toukey is a Javascript library for keyboard shortcuts"
+      description: "Toukey is a simple and efficient keyboard events library."
     },
     {
       lang: "zh",

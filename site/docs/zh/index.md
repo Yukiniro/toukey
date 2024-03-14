@@ -3,7 +3,7 @@ pageType: home
 
 hero:
   name: Toukey.js
-  text: Toukey 是一个用于处理键盘快捷键的 Javascript 库
+  text: Toukey是一个简单高效的键盘事件库。
   actions:
     - theme: brand
       text: 快速开始

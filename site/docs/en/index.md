@@ -3,7 +3,7 @@ pageType: home
 
 hero:
   name: Toukey.js
-  text: Toukey is a Javascript library for keyboard shortcuts
+  text: Toukey is a simple and efficient keyboard events library.
   actions:
     - theme: brand
       text: Quick Start
