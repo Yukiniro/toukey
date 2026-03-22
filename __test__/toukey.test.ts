@@ -336,7 +336,7 @@ describe("Test once", () => {
     }));
 });
 
-describe.only("Test on and off", () => {
+describe("Test on and off", () => {
   test("on", () => {
     return (async () => {
       await new Promise((resolve) => {
