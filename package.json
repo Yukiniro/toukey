@@ -52,7 +52,7 @@
     "url": "https://github.com/Yukiniro/toukey/issues"
   },
   "devDependencies": {
-    "@types/node": "^22.18.0",
+    "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^4.1.0",
     "changelogen": "^0.6.2",
     "eslint": "^10.1.0",
