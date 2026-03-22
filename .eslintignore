@@ -1,9 +1,0 @@
-dist
-demo
-__test__
-.babelrc
-.zhlintrc
-site
-node_modules
-coverage
-assets
